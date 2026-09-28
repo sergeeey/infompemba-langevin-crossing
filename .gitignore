@@ -4,3 +4,4 @@ __pycache__/
 .ruff_cache/
 .claude/
 .qwen/
+prereg_v2/out/

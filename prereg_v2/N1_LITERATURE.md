@@ -1,0 +1,47 @@
+# N1 — литература и ссылки (PREREG_v2, 2026-09-28)
+
+Метки: [VERIFIED-tool] = найдено в OpenAlex/Crossref (scholarly-lookup) или на странице (WebFetch) в этой сессии;
+[TITLE-ONLY] = найдено по названию, аннотация не читалась; [UNVERIFIED] = проверить не удалось.
+Инструмент `arxiv.get_abstract` НЕ годится как проверка существования: заведомо существующий ID (2410.06686) он тоже вернул как «не найдено».
+
+## 1. Ссылки препринта v1 (14 позиций)
+
+| # | Ссылка в статье | Результат проверки |
+|---|---|---|
+| [1] | Lu & Raz, PNAS 114, 5083 (2017) | найдено, DOI 10.1073/pnas.1701264114 [VERIFIED-tool] |
+| [2] | Klich, Raz, Hirschberg, Vucelja, PRX 9, 021060 (2019) | найдено, DOI 10.1103/physrevx.9.021060 [VERIFIED-tool] |
+| [3] | Kumar & Bechhoefer, Nature 584, 64 (2020) | найдено, DOI 10.1038/s41586-020-2560-x [VERIFIED-tool] |
+| [4] | Mpemba & Osborne, Phys. Educ. 4, 172 (1969) | Crossref-поиск ошибка/не найдено; работа доинтернетной эпохи [UNVERIFIED] |
+| [5] | Lasanta et al., PRL 119, 148001 (2017) | найдено, DOI 10.1103/physrevlett.119.148001 [VERIFIED-tool] |
+| [6] | Gal & Raz, PRL 124, 060602 (2020) | найдено, DOI 10.1103/physrevlett.124.060602 [VERIFIED-tool] |
+| [7] | Baity-Jesi et al., PNAS 116, 15350 (2019) | найдено, DOI 10.1073/pnas.1819803116; страница не сверялась [VERIFIED-tool, частично] |
+| [8] | Kramers, Physica 7, 284 (1940) | найдено, DOI 10.1016/s0031-8914(40)90098-2 [VERIFIED-tool] |
+| [9] | Lapolla & Godec, PRL 125, 110602 (2020) | найдено, DOI 10.1103/physrevlett.125.110602; **существует erratum** PRL 128, 229901 (2022), DOI 10.1103/physrevlett.128.229901 — в списке отсутствует [VERIFIED-tool] |
+| [10] | Vu & Hayakawa, PRL 134, 107101 (2025) | найдено, DOI 10.1103/physrevlett.134.107101 [VERIFIED-tool] |
+| [11] | Liu & Hu, arXiv:2507.04206 | найдено по названию: «Mpemba Effect in Large-Language Model Training Dynamics: A Minimal Analysis of the Valley-River model» (реальное название длиннее, чем в статье); ID не подтверждён, авторы не показаны [TITLE-ONLY] |
+| [12] | Teza, Bechhoefer et al., arXiv:2502.01758 | ID подтверждён (DOI 10.48550/arxiv.2502.01758); **название в статье неверно** («a review of the…» отсутствует: реальное — «Speedups in nonequilibrium thermal relaxation: Mpemba and related effects»); работа уже опубликована в Physics Reports, DOI 10.1016/j.physrep.2025.10.009 — цитировать журнальную версию [VERIFIED-tool] |
+| [13] | Chattopadhyay, Santos, Misra, arXiv:2601.05046 | ID и название подтверждены (DOI 10.48550/arxiv.2601.05046); авторы не показаны [VERIFIED-tool, частично] |
+| [14] | Summer et al., PRX 16, 011065 (2026), DOI 10.1103/rbt4-psfd | DOI и название подтверждены; том/номер статьи не сверялись [VERIFIED-tool, частично] |
+
+**Нумерация в тексте v1 нарушена** (прочитано в `paper/preprint_v1.md`, введение): «spin systems [5], colloidal particles [6],
+granular gases [7], clathrate hydrates [8]» — но [5] — гранулярные жидкости, [6] — Gal & Raz (предохлаждение), [7] — спиновые
+стёкла, [8] — Kramers (1940); клатратных гидратов в списке нет вовсе. Все четыре привязки неверны [VERIFIED-read].
+
+## 2. Пересечение с опубликованной работой (новизна)
+
+Найденные по названиям в реестрах; две ближайшие аннотации прочитаны на arXiv (WebFetch, [VERIFIED-tool]):
+
+- **Hayakawa & Takada, «Mpemba effect in a two-dimensional bistable potential», arXiv:2603.24148 (25.03.2026).** Аналитически решаемая
+  модель Мпемба для передемпфированного Ланжевена в 2D радиально-симметричном бистабильном потенциале; оператор Фоккера–Планка
+  сводится к задаче Шрёдингера; явные амплитуды мод; коэффициент самой медленной моды; условия пересечения KL. Тот же класс задач и тот же аппарат, что у нас.
+- **Biswas, Prasad, Rajesh, «Mpemba effect in driven granular gases: role of distance measures», arXiv:2303.10900 (2023).** Четыре меры
+  расстояния; вывод: наличие эффекта Мпемба зависит от определения меры. Центральный тезис v1 об «observable-specificity» в общей форме опубликован раньше, на другой системе.
+- [TITLE-ONLY]: «Mpemba effect in a Langevin system: Population statistics, metastability, and other exact results» (J. Chem. Phys. 2023,
+  10.1063/5.0155855); «The Metastable Mpemba Effect Corresponds to a Non-monotonic Temperature Dependence of Extractable Work» (Front. Phys. 2021);
+  «Thermal Versus Entropic Mpemba Effect in Molecular Gases with Nonlinear Drag» (PRE 2022); «Anomalous heating in a colloidal system» (PNAS 2022);
+  «Microscopic theory of Mpemba effects and a no-Mpemba theorem for monotone many-body systems» (arXiv:2410.06623);
+  «Mpemba effect for a Brownian particle trapped in a single well potential» (PRE 2023); «Predicting the conditions for observing the Mpemba effect» (arXiv:2606.03445).
+
+**Вывод N1:** слова «new / novel» для механизма, для «observable-specificity» и для самой модели неприменимы. Заметка должна цитировать Lu–Raz, Klich et al.,
+Biswas et al., Hayakawa & Takada как предшествующие работы. Вклад может быть только методическим (ловушки оценки равновесия по хвостам, проверка порядка
+начальных расстояний, валидация решателя) — при условии, что результат основного прогона это подтвердит.
