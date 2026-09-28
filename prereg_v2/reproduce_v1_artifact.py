@@ -129,7 +129,18 @@ agg = (
 m = df.merge(agg, left_on=["b", "T"], right_on=["barrier", "T"])
 diff = (m["pl_v1pct"] - m["v1_mean"]).abs()
 m.assign(abs_diff=diff)[
-    ["b", "T", "pl_v1pct", "v1_mean", "v1_sd", "abs_diff", "pl_max_abs_gap", "pl_noise_model"]
+    [
+        "b",
+        "T",
+        "pl_v1pct",
+        "v1_mean",
+        "v1_sd",
+        "abs_diff",
+        "pl_max_abs_gap",
+        "pl_noise_model",
+        "pl_analytic_eq_pct",
+        "pl_first",
+    ]
     + [f"pl_noise_model_t{t}" for t in THETA_SWEEP]
     + ["pl_frac_below_theta"]
 ].to_csv("prereg_v2/v1_compare_points.csv", index=False)

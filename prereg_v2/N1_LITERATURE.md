@@ -67,3 +67,8 @@ Biswas et al., Hayakawa & Takada как предшествующие работ�
 - **Только название и авторы:** Chétrite, Kumar, Bechhoefer, Front. Phys. 2021 (DOI 10.3389/fphy.2021.654271).
 - **Только идентификаторы (DOI/название):** Lu & Raz 2017; Kumar & Bechhoefer 2020 (аннотация в OpenAlex отсутствует); Teza et al. 2025; Scharfetter–Gummel 1969; Grassmann–Taksar–Heyman 1985. Полных текстов не читалось.
 - В заметке содержательные утверждения об этих работах (спектральное происхождение у Lu & Raz; коллоидная частица в потенциальном ландшафте у Kumar & Bechhoefer) помечены как «по памяти».
+
+## 5. Ссылки [4] и [11] препринта v1 (2026-09-28)
+
+- **[11] Liu & Hu:** запись OpenAlex W4415346113 существует, 2025 г.; название там «Mpemba Effect in Large-Language Model Training Dynamics: A Minimal Analysis of the Valley-River model»; авторы указаны как «S Liu, Zhijian Hu» (в v1: «J. Liu and Z. Hu» — инициал, вероятно, неверен); DOI и arXiv-ID в записи не показаны, так что ID 2507.04206 остаётся непроверенным. Аннотация прочитана (анализ «valley-river» ландшафтов, точка «strong point», где медленная мода исчезает).
+- **[4] Mpemba & Osborne 1969:** два запроса к реестру вернули HTTP 400; не проверено (работа доцифровой эпохи); проверить автору вручную.

@@ -1,0 +1,61 @@
+=== main run (summary_main.csv) ===
+[OK] KL EFFECT: note says 288/288; recomputed 288/288
+[OK] W1 EFFECT / NO_TEST: note says 283 / 5; recomputed 283 / 5
+[OK] NO_TEST all at kappa=0.1, P0 ratio 1.249: note says kappa=0.1, 1.249; recomputed kappa [0.1], P0 1.2487..1.2495
+[OK] K1: EFFECT_BOTH at kappa=0: note says 72 of 72; recomputed 72 of 72
+[OK] K2: KL-only points = the 5 NO_TEST: note says 5; recomputed 5
+[OK] R-eligible points: note says 224 (56 per kappa); recomputed 224 ({0.0: np.int64(56), 0.02: np.int64(56), 0.05: np.int64(56), 0.1: np.int64(56)})
+[OK] kappa!=0 R-eligible: note says 168; recomputed 168
+[OK] R agreement (excluding [0.95,1.05]): note says 224 of 224; recomputed 224 of 224
+[OK] r range at kappa!=0: note says 0.003..0.43; recomputed 0.0030..0.4253
+[OK] kappa=0 |c1(hot)| max: note says <= 1.8e-9; recomputed 1.78e-09
+[OK] kappa=0 |c1(cold)| range: note says 0.90..1.00; recomputed 0.902..1.000
+[OK] t*/t_max (KL) range: note says 7e-45..1.7e-2; recomputed 6.69e-45..1.74e-02
+[OK] lambda1 sources: note says 224 eig / 64 quad; recomputed 224 / 64
+[OK] KL P0 min ratio: note says >= 30.5; recomputed 30.5
+[OK] energy at kappa=0 degenerate: note says 72/72 degenerate; recomputed 72/72
+[OK] energy at kappa!=0 EFFECT: note says 216/216; recomputed 216/216
+[OK] Var(x) EFFECT: note says 288/288; recomputed 288/288
+
+=== margins (npz) ===
+[OK] median ratio over window min (KL, W1): note says >= 165, >= 377; recomputed 164.8, 377.1
+[OK] fraction of window records with ratio >= 2: note says >= 0.995; recomputed 0.9951
+[OK] late-time ratio min (KL, W1): note says >= 1.7, >= 1.9; recomputed 1.68, 1.88
+[OK] ratio at t* (KL) min / median: note says 1.001 / 2.26; recomputed 1.001 / 2.26
+[OK] cells per well width at dx=0.005: note says >= 7; recomputed 7.07
+
+=== hot-family sweep (summary_robustness.csv) ===
+[OK] 225 runs, P0 in KL: note says 225, all; recomputed 225, 225
+[OK] KL EFFECT by sigma: note says 55/65/75; recomputed {1.0: 55, 1.5: 65, 3.0: 75}
+[OK] W1 NO_TEST by sigma: note says 55/55/5; recomputed {1.0: 55, 1.5: 55, 3.0: 5}
+[OK] W1 EFFECT / testable at |mu|=2: note says 0/20, 10/20, 30/30; recomputed {1.0: (0, 20), 1.5: (10, 20), 3.0: (30, 30)}
+[OK] narrow states testable only at |mu|=2: note says only |mu|=2; recomputed [-2.0, 2.0]
+[OK] 30 no-margin runs, all |mu|=2, 20 with |r-1|<=0.05, r 0.87..0.97: note says 30 / |mu|=2 / 20 / 0.87..0.97; recomputed 30 / [2.0] / 20 / 0.871..0.971
+[OK] no-margin split by sigma: note says 20 (sigma=1), 10 (sigma=1.5); recomputed (20, 10)
+[OK] R agreement in sweep, r<1 everywhere: note says 225/225, r<1 all; recomputed 225/225, r<1: 225
+
+=== v1 comparison (v1_compare_points.csv, h = 0.025) ===
+[OK] Pearson / mean discrepancy (h=0.025): note says 0.33 / 24.7; recomputed 0.328 / 24.74
+[OK] points > 70%: noise-free / v1: note says 57 / 27; recomputed 57 / 27
+[OK] degenerate points: note says 11; recomputed 11
+[OK] earlier sd: degenerate / other (medians): note says 51.4 / 4.7; recomputed 51.4 / 4.7
+[OK] mean discrepancy at non-degenerate: note says 19.8; recomputed 19.8
+[OK] baselines 18.5 / 19.1 / 9.9 and model 8.8: note says 18.5 / 19.1 / 9.9 / 8.8; recomputed [np.float64(18.5), np.float64(19.1), np.float64(9.9), np.float64(8.8)]
+[OK] stratified: degenerate 15.4; other model 7.6, shrink 8.9: note says 15.4 / 7.6 / 8.9; recomputed 15.4 / 7.6 / 8.9
+[OK] noise floors: all 3.5, degenerate 12.3, other 1.9: note says 3.5 / 12.3 / 1.9; recomputed [np.float64(3.5), np.float64(12.3), np.float64(1.9)]
+[OK] theta 0.005..0.03 range 6.9..9.8: note says 6.9..9.8; recomputed 6.92..9.84
+[OK] 57 points with majority below theta; overlap 42: note says 57 / 42; recomputed 57 / 42
+[OK] round-off points 4; Pearson 0.39, mean 22.6, 56 points: note says 4 / 0.39 / 22.6 / 56; recomputed 4 / 0.39 / 22.6 / 56
+[OK] reference point noise-free 95.0 vs 94.8+-0.6: note says 95.0 vs 94.8 +- 0.6; recomputed 95.0 vs 94.8 +- 0.6
+
+=== time-step variants (four runs of the reproduction) ===
+[OK] Pearson x4: note says 0.25/0.33/0.22/0.29; recomputed [np.float64(0.25), np.float64(0.33), np.float64(0.22), np.float64(0.29)]
+[OK] mean discrepancy x4: note says 25.4/24.7/26.2/24.9; recomputed [np.float64(25.4), np.float64(24.7), np.float64(26.2), np.float64(24.9)]
+[OK] ablation A points x4: note says 62/57/61/59; recomputed [62, 57, 61, 59]
+[OK] ablation A mean x4: note says 88.3/82.4/86.0/83.5; recomputed [np.float64(88.3), np.float64(82.4), np.float64(86.0), np.float64(83.5)]
+[OK] ablation B points x4: note says 72/72/70/72; recomputed [72, 72, 70, 72]
+[OK] ablation B mean x4: note says 99.9/99.8/98.1/100.0; recomputed [np.float64(99.9), np.float64(99.8), np.float64(98.1), np.float64(100.0)]
+[OK] ablation B minimum x4: note says 99.2/88.0/25.5/99.3; recomputed [np.float64(99.2), np.float64(88.0), np.float64(25.5), np.float64(99.3)]
+[OK] first record gap<0 x4: note says 71/70/70/69; recomputed [71, 70, 70, 69]
+
+50 of 50 claims reproduced
