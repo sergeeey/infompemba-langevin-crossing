@@ -80,3 +80,22 @@ for th in (0.005, 0.01, 0.02, 0.03, 0.05):
         f"  theta={th:<5}: mean |model - parquet| {e.mean():5.1f} pp, Pearson r "
         f"{np.corrcoef(cmp[col], cmp['v1_mean'])[0, 1]:.2f}, within 5 pp {int((e <= 5).sum())}/72"
     )
+
+print("\nPOST-HOC baselines and the noise floor of the target (skeptic items 3 and 13):")
+frac = cmp["pl_frac_below_theta"]
+print(
+    f"  points where more than half of the records have |gap| <= 0.02: {int((frac > 0.5).sum())}/72; "
+    f"mean fraction of records below theta: {frac.mean():.2f}"
+)
+grand = float((cmp["v1_mean"] - cmp["v1_mean"].mean()).abs().mean())
+hybrid = np.where(cmp["pl_max_abs_gap"] < 1e-6, 50.0, cmp["pl_v1pct"])
+print(f"  baseline 1, grand mean of the earlier map everywhere: mean |error| {grand:.1f} pp")
+print(
+    f"  baseline 2, 50% at degenerate points and the noise-free metric elsewhere: "
+    f"{float(np.abs(hybrid - cmp['v1_mean']).mean()):.1f} pp"
+)
+se = cmp["v1_sd"] / np.sqrt(10)
+print(
+    f"  noise floor of the target (mean standard error of the ten-seed means): {se.mean():.1f} pp "
+    f"(expected |error| of a perfect model ~ 0.8 x SE = {0.8 * se.mean():.1f} pp)"
+)

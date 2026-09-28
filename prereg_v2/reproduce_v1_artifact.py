@@ -95,6 +95,7 @@ for b in BARRIERS:
         row["pl_max_abs_gap"] = float(np.abs(np.abs(_h - _eq) - np.abs(_c - _eq)).max())
         # POST-HOC noise-floor model of the v1 metric: records with |gap| <= theta are coin flips at N = 5000
         _gap = np.abs(_h - _eq) - np.abs(_c - _eq)
+        row["pl_frac_below_theta"] = float((np.abs(_gap) <= NOISE_THETA).mean())
         row["pl_noise_model"] = 100.0 * float(
             (_gap < -NOISE_THETA).mean() + 0.5 * (np.abs(_gap) <= NOISE_THETA).mean()
         )
@@ -130,6 +131,7 @@ diff = (m["pl_v1pct"] - m["v1_mean"]).abs()
 m.assign(abs_diff=diff)[
     ["b", "T", "pl_v1pct", "v1_mean", "v1_sd", "abs_diff", "pl_max_abs_gap", "pl_noise_model"]
     + [f"pl_noise_model_t{t}" for t in THETA_SWEEP]
+    + ["pl_frac_below_theta"]
 ].to_csv("prereg_v2/v1_compare_points.csv", index=False)
 print(f"grid points compared: {len(m)}")
 print("p_left, v1 metric on EXACT trajectories vs v1's own 10-seed means:")
