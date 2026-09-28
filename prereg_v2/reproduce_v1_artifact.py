@@ -21,7 +21,7 @@ from src.mpemba_exact import _implicit_step, make_grid, potential
 BARRIERS = [0.1, 0.3, 0.5, 0.7, 1.0, 1.5, 2.0, 3.0, 5.0]
 TEMPS = [0.05, 0.1, 0.15, 0.2, 0.3, 0.5, 0.7, 1.0]
 N_REC, DT_REC, SUBSTEPS = 600, 0.25, 10
-THETA_SWEEP = [0.005, 0.01, 0.03, 0.05]
+THETA_SWEEP = [0.005, 0.0063, 0.01, 0.03, 0.05]
 NOISE_THETA = (
     0.02  # ~2 sqrt(2) * sqrt(0.25 / 5000): sampling noise of the difference of two p_left estimates
 )

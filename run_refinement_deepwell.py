@@ -51,6 +51,7 @@ def run(args):
         gap_new = cv.d[m][i, 0] - cv.d[m][i, 1]
         ratio_new = gap_new / (MARGIN * (cv.err[m][i, 0] + cv.err[m][i, 1]))
         n = min(old["t"].size, cv.t.size)
+        assert np.allclose(old["t"][:n], cv.t[:n], rtol=1e-9), "time grids differ"
         d_old, e_old = old[f"d_{m}"][:n], old[f"err_{m}"][:n]
         gap_old = d_old[i, 0] - d_old[i, 1]
         ratio_old = gap_old / (MARGIN * (e_old[i, 0] + e_old[i, 1]))
@@ -79,7 +80,7 @@ def main() -> int:
                     f"  {m.upper()}: label {d['label']}; late ratio old (dx .01/.005) {d['ratio_old']:.2f} -> "
                     f"new (dx .005/.0025) {d['ratio_new']:.2f}; gap old {d['gap_old_new'][0]:.4e} new "
                     f"{d['gap_old_new'][1]:.4e}; |D(.0025) - D(.005)| cold/hot "
-                    f"{d['dx_diff_cold_hot'][0]:.2e}/{d['dx_diff_cold_hot'][1]:.2e} vs main error estimate "
+                    f"{d['dx_diff_cold_hot'][0]:.2e}/{d['dx_diff_cold_hot'][1]:.2e} vs main error estimate (dx + time Richardson terms) "
                     f"{d['main_err_cold_hot'][0]:.2e}/{d['main_err_cold_hot'][1]:.2e}"
                 )
             ok &= r["kl"]["label"] == "EFFECT"

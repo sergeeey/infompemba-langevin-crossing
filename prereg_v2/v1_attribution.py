@@ -21,9 +21,14 @@ def _p_left(x0, barrier, temperature, clip_on, seed):
     n = x0.size
     n_rec = N_STEPS // EVERY
     left = np.zeros((n, n_rec), dtype=np.uint8)
+    bad = np.zeros(
+        n, dtype=np.uint8
+    )  # particles whose position became non-finite (no-clip runaway)
     noise_std = np.sqrt(2.0 * temperature * ETA)
     for i in prange(n):
-        np.random.seed(seed + i)
+        # WHY seed * 1000003 + i: with seed + i the streams of seeds 42, 43, ... were the same streams
+        # shifted by one particle (review finding), so the "independent seeds" were nearly one realization
+        np.random.seed((seed * 1000003 + i) % 4294967295)
         x = x0[i]
         j = 0
         for s in range(1, N_STEPS + 1):
@@ -36,7 +41,9 @@ def _p_left(x0, barrier, temperature, clip_on, seed):
             if s % EVERY == 0:
                 left[i, j] = 1 if x < 0.0 else 0
                 j += 1
-    return left.sum(axis=0) / n
+        if not np.isfinite(x):
+            bad[i] = 1
+    return left.sum(axis=0) / n, bad.sum() / n
 
 
 def v1_pct(cold, hot):
@@ -47,9 +54,11 @@ def v1_pct(cold, hot):
 
 def run(barrier, temperature, n, clip_on, seed):
     rng = np.random.default_rng(seed)
-    cold = _p_left(rng.normal(1.0, 0.05, n), barrier, temperature, clip_on, seed)
-    hot = _p_left(rng.normal(0.0, 2.0, n), barrier, temperature, clip_on, seed + 10_000_000)
-    return v1_pct(cold, hot)
+    cold, cold_bad = _p_left(rng.normal(1.0, 0.05, n), barrier, temperature, clip_on, seed)
+    hot, hot_bad = _p_left(
+        rng.normal(0.0, 2.0, n), barrier, temperature, clip_on, seed + 10_000_000
+    )
+    return v1_pct(cold, hot), max(cold_bad, hot_bad)
 
 
 def main() -> int:
@@ -70,14 +79,19 @@ def main() -> int:
         )
         means = {}
         for name, n, clip_on, seeds in variants:
-            vals = np.array([run(b, t, n, clip_on, s) for s in seeds])
+            results = [run(b, t, n, clip_on, s) for s in seeds]
+            vals = np.array([r[0] for r in results])
+            diverged = max(r[1] for r in results)
             means[name] = vals.mean()
             print(
                 f"  {name:15s}: {vals.mean():6.1f} +- {vals.std(ddof=1) if len(vals) > 1 else 0:5.1f}"
-                f"  (n_seeds {len(vals)})"
+                f"  (n_seeds {len(vals)}; diverged particles up to {diverged:.4f})"
             )
         gap0 = abs(means["N=5000  clip"] - exact)
-        fin = gap0 - abs(means["N=50000 clip"] - exact) >= 0.5 * gap0 and gap0 > 0
+        closes = gap0 - abs(means["N=50000 clip"] - exact) >= 0.5 * gap0 and gap0 > 0
+        # second condition of D2.9a (added after review): clipping must not affect the mean by half the gap
+        clip_noeffect = abs(means["N=5000  noclip"] - means["N=5000  clip"]) < 0.5 * gap0
+        fin = closes and clip_noeffect
         clp = gap0 - abs(means["N=5000  noclip"] - exact) >= 0.5 * gap0 and gap0 > 0
         fin_ok += int(fin)
         clip_ok += int(clp)

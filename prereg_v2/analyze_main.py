@@ -44,7 +44,9 @@ for name in ("b2.0_T0.2_k0.0", "b1.0_T0.5_k0.0", "b0.1_T1.0_k0.0"):
         f"D_u,hot(0) = {d[0, 1]:.2e}, err max = {z['err_u'].max():.2e}"
     )
 
-print("\n--- margin robustness of KL/W1 EFFECT: min over sustained window of gap / (5 err) ---")
+print(
+    "\n--- margin over the window INCLUDING t* (about 1 by construction; see margin_robustness.py for the informative statistics) ---"
+)
 worst = {"kl": (np.inf, None), "w1": (np.inf, None)}
 tstar = {"kl": [], "w1": []}
 for r in rows:
@@ -54,7 +56,7 @@ for r in rows:
         if r[f"{m}_label"] != "EFFECT":
             continue
         d, e = z[f"d_{m}"], z[f"err_{m}"]
-        sel = (t > r[f"{m}_tstar"] - 1e-300) & (t <= r["t_max"]) & (d[:, 0] >= D_FLOOR)
+        sel = (t >= r[f"{m}_tstar"]) & (t <= r["t_max"]) & (d[:, 0] >= D_FLOOR)
         ratio = ((d[:, 0] - d[:, 1]) / (MARGIN * (e[:, 0] + e[:, 1])))[sel].min()
         tstar[m].append(r[f"{m}_tstar"] / r["t_max"])
         if ratio < worst[m][0]:
