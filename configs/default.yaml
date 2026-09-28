@@ -1,0 +1,43 @@
+experiment:
+  name: "mpemba_fisher_fashionmnist_v1"
+  num_runs: 1000
+  max_iterations: 2000
+  eval_interval: 10
+  base_seed: 42
+
+model:
+  architecture: "MLP"
+  layers: [784, 256, 128, 10]
+  activation: "tanh"
+  bias: true
+
+data:
+  dataset: "FashionMNIST"
+  batch_size: 16
+  val_samples_kl: 10000
+  data_dir: "./data"
+
+optimizer:
+  type: "LangevinFisher"
+  lr: 0.01
+  momentum: 0.0
+  noise_scale: 1.0
+
+initialization:
+  cold_noise_std: 0.01
+  hot_gain_multiplier: 3.0
+  hot_laplace_scale: 0.5
+  ref_epochs: 50
+  ref_lr: 0.001
+  ref_target_loss: 0.05
+
+hardware:
+  device: "cuda"
+  num_workers: 4
+  deterministic: true
+
+output:
+  results_dir: "./results"
+  parquet_file: "trajectories.parquet"
+  theta_star_file: "theta_star.pt"
+  log_interval: 100

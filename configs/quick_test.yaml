@@ -1,0 +1,41 @@
+data:
+  batch_size: 64
+  data_dir: ./data
+  dataset: FashionMNIST
+  val_samples_kl: 10000
+experiment:
+  base_seed: 42
+  eval_interval: 50
+  max_iterations: 200
+  name: mpemba_quick_test
+  num_runs: 50
+hardware:
+  deterministic: true
+  device: cuda
+  num_workers: 0
+initialization:
+  cold_noise_std: 0.005
+  hot_gain_multiplier: 3.0
+  hot_laplace_scale: 0.5
+  ref_epochs: 50
+  ref_lr: 0.001
+  ref_target_loss: 0.05
+model:
+  activation: tanh
+  architecture: MLP
+  bias: true
+  layers:
+  - 784
+  - 256
+  - 128
+  - 10
+optimizer:
+  lr: 0.01
+  momentum: 0.0
+  noise_scale: 1.0
+  type: VanillaSGD
+output:
+  log_interval: 10
+  parquet_file: trajectories_quick_test.parquet
+  results_dir: ./results
+  theta_star_file: theta_star.pt

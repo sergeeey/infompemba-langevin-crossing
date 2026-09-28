@@ -1,0 +1,49 @@
+# ============================================================
+# Pilot validation config
+# Batch=16 (ТЗ requirement), 50 runs, KL + crossing check only
+# ============================================================
+
+experiment:
+  name: "mpemba_pilot_validation"
+  num_runs: 50               # Enough to detect if crossing exists
+  max_iterations: 2000       # Extended to capture crossing (~step 60 = iter 600)
+  eval_interval: 50          # Was 10, reduced 5x to lower GPU load
+  base_seed: 42
+
+model:
+  layers: [784, 256, 128, 10]
+  activation: "tanh"
+  bias: true
+
+data:
+  dataset: "FashionMNIST"
+  batch_size: 16             # ТЗ REQUIREMENT
+  val_samples_kl: 2000       # Was 10000, reduced to lower GPU load
+  data_dir: "./data"
+
+optimizer:
+  type: "VanillaSGD"         # Pilot: skip Fisher for speed, test crossing first
+  lr: 0.01
+  momentum: 0.0
+  noise_scale: 1.0
+
+initialization:
+  cold_noise_std: 0.005
+  hot_gain_multiplier: 3.0
+  hot_laplace_scale: 0.5
+  ref_epochs: 50
+  ref_lr: 0.001
+  ref_target_loss: 0.05
+
+hardware:
+  device: "cuda"
+  num_workers: 0
+  deterministic: false
+  mixed_precision: false
+  cooldown_seconds: 2         # Pause between trajectories to reduce GPU load
+
+output:
+  results_dir: "./results"
+  parquet_file: "trajectories_pilot_v2.parquet"
+  theta_star_file: "theta_star.pt"
+  log_interval: 10

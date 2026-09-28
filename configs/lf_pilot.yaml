@@ -1,0 +1,50 @@
+# ============================================================
+# Phase A: Discriminating Pilot — LangevinFisher
+# 30 hot + 30 cold, batch=16, 2000 steps
+# KILL CRITERION: no stable crossing = NO full run
+# ============================================================
+
+experiment:
+  name: "mpemba_langevin_fisher_pilot"
+  num_runs: 5                # Quick validation first
+  max_iterations: 30000
+  eval_interval: 50          # Was 10, reduced to lower GPU load
+  base_seed: 42
+
+model:
+  layers: [784, 256, 128, 10]
+  activation: "tanh"
+  bias: true
+
+data:
+  dataset: "FashionMNIST"
+  batch_size: 16
+  val_samples_kl: 2000       # Was 10000, reduced to lower GPU load
+  data_dir: "./data"
+
+optimizer:
+  type: "LangevinFisher"
+  lr: 0.0003                 # Reduced: cold must stay near theta_star
+  momentum: 0.0
+  noise_scale: 0.3            # Reduced: less diffusion to keep cold stable
+
+initialization:
+  cold_noise_std: 0.005
+  hot_gain_multiplier: 3.0
+  hot_laplace_scale: 0.5
+  ref_epochs: 50
+  ref_lr: 0.001
+  ref_target_loss: 0.05
+
+hardware:
+  device: "cuda"
+  num_workers: 0
+  deterministic: false
+  mixed_precision: false
+  cooldown_seconds: 2         # Pause between trajectories to reduce GPU load
+
+output:
+  results_dir: "./results"
+  parquet_file: "trajectories_cold_drift_test.parquet"
+  theta_star_file: "theta_star.pt"
+  log_interval: 5
