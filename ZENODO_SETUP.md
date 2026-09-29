@@ -3,13 +3,14 @@
 Prepared 2026-09-29; not yet done by the assistant, since each step below needs the
 author's own login or an author decision. See PENDING items marked `[AUTHOR]`.
 
-## 1. Before enabling Zenodo (author decisions, not yet made)
+## 1. Before enabling Zenodo (author decisions)
 
-- `[AUTHOR]` Settle the author name: the earlier draft's files say "Sergei Boiko", this
-  repository's git configuration says "Sergey Boyko" (see `paper/note_v2_draft.md` line 6
-  and `CITATION.cff`).
-- `[AUTHOR]` Fill in `CITATION.cff` (name, email, date-released) and choose a license
-  (add a `LICENSE` file — Zenodo requires one to set the deposit's own license).
+- ~~Settle the author name~~ — **done 2026-09-29**: "Sergey Boyko" (git-config spelling),
+  affiliation "Independent researcher, Almaty, Kazakhstan", email sergeikuch80@gmail.com.
+  Filled into `CITATION.cff` and `paper/note_v2_draft.md` line 6.
+- `[AUTHOR]` `CITATION.cff` still needs `date-released` (set it when the release is
+  actually made) and a chosen license (add a `LICENSE` file — Zenodo requires one to
+  set the deposit's own license).
 - `[AUTHOR]` Decide the venue / whether this is ready to be citable at all: the note
   (`paper/note_v2_draft.md`) has not had a 4th skeptic pass, and references [4] and [11]
   are unverified (`prereg_v2/N1_LITERATURE.md` §5). A Zenodo DOI, once minted, is very

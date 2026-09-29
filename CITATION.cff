@@ -1,13 +1,15 @@
 cff-version: 1.2.0
-message: "If you use this repository, cite it as below. AUTHOR NAME AND EMAIL BELOW ARE PLACEHOLDERS: fill them in before creating the release that Zenodo will archive (see paper/note_v2_draft.md line 6 for the same unresolved decision)."
+message: "If you use this repository, cite it as below. LICENSE and date-released are still placeholders: fill them in before creating the release that Zenodo will archive."
 title: "A Mpemba \"crossing\" that the metric could not test: an audit of an earlier analysis and a pre-specified re-analysis of a double-well Langevin model"
 type: software
 authors:
-  - family-names: "PLACEHOLDER-FAMILY-NAME"
-    given-names: "PLACEHOLDER-GIVEN-NAME"
-    # The earlier draft's files say "Sergei Boiko"; the git configuration of this
-    # repository says "Sergey Boyko". Settle this before release (author decision).
-    email: "PLACEHOLDER@EXAMPLE.INVALID"
+  - family-names: "Boyko"
+    given-names: "Sergey"
+    # Settled 2026-09-29: the earlier draft's files said "Sergei Boiko", the git
+    # configuration of this repository said "Sergey Boyko" -- the author chose the
+    # git-config spelling (see paper/note_v2_draft.md line 6 for the same decision).
+    affiliation: "Independent researcher, Almaty, Kazakhstan"
+    email: "sergeikuch80@gmail.com"
 license: "PLACEHOLDER — no license chosen yet; see repository root for a LICENSE file once added"
 repository-code: "https://github.com/sergeeey/infompemba-langevin-crossing"
 version: "0.4.0-draft"

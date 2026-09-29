@@ -3,8 +3,8 @@
 **DRAFT v0.4 — not for submission.** Bracketed items `[...]` are decisions or facts only the author can supply.
 **Intended venue class:** an archival correction note (e.g. Zenodo, possibly with a replacement/withdrawal notice for the earlier draft). The frozen pre-specification (rule K3) sets exactly this ceiling: "not submitted as new work; at most a note that presents the result as a numerical illustration". Sending this to a research journal would need a declared deviation from that rule.
 
-**Author:** [NAME — the files of the earlier draft say "Sergei Boiko", the git configuration says "Sergey Boyko"; to be settled by the author]
-**Affiliation:** [AFFILIATION] **Correspondence:** [E-MAIL]
+**Author:** Sergey Boyko (settled 2026-09-29; the earlier draft's files said "Sergei Boiko", the git configuration said "Sergey Boyko" — the author chose the git-config spelling)
+**Affiliation:** Independent researcher, Almaty, Kazakhstan **Correspondence:** sergeikuch80@gmail.com
 **AI-assistance disclosure:** [text required by the target venue. The analysis code, the numerical validation, the pre-specification and the drafting of this note were all produced with one AI coding assistant (Claude) in a single working session on one machine, under the author's direction; reviewers were also AI agents. The venue's policy has not been checked.]
 **Status of the earlier draft and its data:** [AUTHOR TO STATE whether the earlier draft was ever posted or circulated. Section 5 quotes figures from it and from its result files (`results/phase_diagram.parquet`); a reader can check them only if both are deposited with this note.]
 
