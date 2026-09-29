@@ -12,15 +12,15 @@
 [OK] kappa=0 |c1(cold)| range: note says 0.90..1.00; recomputed 0.902..1.000
 [OK] t*/t_max (KL) range: note says 7e-45..1.7e-2; recomputed 6.69e-45..1.74e-02
 [OK] lambda1 sources: note says 224 eig / 64 quad; recomputed 224 / 64
-[OK] KL P0 min ratio: note says >= 30.5; recomputed 30.5
+[OK] KL P0 min ratio: note says >= 30.4 (exactly 30.4557); recomputed 30.4557
 [OK] energy at kappa=0 degenerate: note says 72/72 degenerate; recomputed 72/72
 [OK] energy at kappa!=0 EFFECT: note says 216/216; recomputed 216/216
 [OK] Var(x) EFFECT: note says 288/288; recomputed 288/288
 
 === margins (npz) ===
-[OK] median ratio over window min (KL, W1): note says >= 165, >= 377; recomputed 164.8, 377.1
+[OK] median ratio over window min (KL, W1): note says >= 164.8, >= 377; recomputed 164.8, 377.1
 [OK] fraction of window records with ratio >= 2: note says >= 0.995; recomputed 0.9951
-[OK] late-time ratio min (KL, W1): note says >= 1.7, >= 1.9; recomputed 1.68, 1.88
+[OK] late-time ratio min (KL, W1): note says >= 1.68, >= 1.88; recomputed 1.68, 1.88
 [OK] ratio at t* (KL) min / median: note says 1.001 / 2.26; recomputed 1.001 / 2.26
 [OK] cells per well width at dx=0.005: note says >= 7; recomputed 7.07
 

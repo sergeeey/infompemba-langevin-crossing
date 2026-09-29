@@ -1,11 +1,11 @@
 # A Mpemba "crossing" that the metric could not test: an audit of an earlier analysis and a pre-specified re-analysis of a double-well Langevin model
 
 **DRAFT v0.4 — not for submission.** Bracketed items `[...]` are decisions or facts only the author can supply.
-**Intended venue class:** an archival correction note (e.g. Zenodo, possibly with a replacement/withdrawal notice for the earlier draft). The frozen pre-specification (rule K3) sets exactly this ceiling: "not submitted as new work; at most a note that presents the result as a numerical illustration". Sending this to a research journal would need a declared deviation from that rule.
+**Intended venue class:** an archival correction note (e.g. Zenodo, possibly with a replacement/withdrawal notice for the earlier draft). The frozen pre-specification (rule K3, written in Russian; the quotation below is the author's own translation) sets exactly this ceiling: "not submitted as new work; at most a note that presents the result as a numerical illustration". Sending this to a research journal would need a declared deviation from that rule.
 
 **Author:** Sergey Boyko (settled 2026-09-29; the earlier draft's files said "Sergei Boiko", the git configuration said "Sergey Boyko" — the author chose the git-config spelling)
 **Affiliation:** Independent researcher, Almaty, Kazakhstan **Correspondence:** sergeikuch80@gmail.com
-**AI-assistance disclosure:** [text required by the target venue. The analysis code, the numerical validation, the pre-specification and the drafting of this note were all produced with one AI coding assistant (Claude) in a single working session on one machine, under the author's direction; reviewers were also AI agents. The venue's policy has not been checked.]
+**AI-assistance disclosure:** [text required by the target venue. The analysis code, the numerical validation, the pre-specification and the drafting of this note were all produced with one AI coding assistant (Claude) on one machine, under the author's direction, across several working sessions between 2026-09-28 and 2026-09-29 (the later sessions made metadata and cross-check additions and this fourth-pass revision; they did not rerun the underlying numerical pipeline); reviewers were also AI agents. The venue's policy has not been checked.]
 **Status of the earlier draft and its data:** [AUTHOR TO STATE whether the earlier draft was ever posted or circulated. Section 5 quotes figures from it and from its result files (`results/phase_diagram.parquet`); a reader can check them only if both are deposited with this note.]
 
 ## Abstract
@@ -14,11 +14,13 @@ An earlier draft of this work reported a "Mpemba-like crossing" in the basin-occ
 reference point b = 1, T = 0.2, over 30 seeds; the ten-seed grid gives 94.8 ± 0.6%) and argued that the effect is observable-specific. A pre-publication audit showed that the analysis could not have detected the
 effect it claimed. We document why and re-examine the model with a grid-refined, validated numerical solution of the one-dimensional Fokker–Planck equation and a pre-specified protocol with controls.
 (1) *Why a crossing was reported without any possibility of a valid test.* For p_left at κ = 0 (no tilt) the symmetric hot state sits at the equilibrium value 0.5 from the start, so it can never start farther than the cold
-state, and the criterion did not check the initial ordering. On noise-free numerical trajectories this alone gives a "crossing" (> 70% of the recorded time) at 70–72 of 72 grid points (mean 98–100%, depending on the
+state. The earlier draft's own detection definition (§II.D) does require the initial ordering to be reversed, but its analysis code never applies that check — it computes only the fraction of time the gap is negative, with no
+initial-state test (§5). (The same draft's §II.B, describing the hot state as "closer to equilibrium basin proportions", is itself in tension with the ordering its own detection formula requires.) On noise-free numerical
+trajectories this gap between definition and code alone gives a "crossing" (> 70% of the recorded time) at 70–72 of 72 grid points (mean 98–100%, depending on the
 numerical time step) even with the analytic equilibrium; with the initial-ordering check none of the 72 points can be tested. Estimating the equilibrium from the tails of the compared trajectories is not necessary for the artefact.
 (2) *The earlier phase map is not reproduced and is not validly explained.* The earlier metric on noise-free trajectories does not reproduce it (Pearson correlation 0.22–0.33 across four time steps; mean discrepancy
-24.7–26.2 percentage points, against 18.5 for predicting the map's mean everywhere). At 11 points the metric is degenerate (both trajectories stationary: the earlier ten-seed spread is 51 points against 4.7 elsewhere) and at 57
-of 72 points most records have a noise-free difference below the sampling noise; a post-hoc model built on this fits at the original sample size, is no better than a simple shrinkage baseline, and fails an out-of-sample
+24.7–26.2 percentage points, against 18.5 for predicting the map's mean everywhere). At 11 points the metric is degenerate (both trajectories stationary: the earlier ten-seed spread has median 51 points against a median 4.7 elsewhere) and at 57
+of 72 points most records have a noise-free difference below the sampling noise; a post-hoc model built on this fits at the original sample size with little advantage over a simple shrinkage baseline (8.8 vs 9.9 percentage points overall), and fails an out-of-sample
 check at larger N, so we regard the map as only qualitatively understood. (3) *Re-analysis.* With the flaws removed, a symmetric hot state crosses a one-well-restricted cold state in the Kullback–Leibler distance at all 288 parameter
 combinations, and in both Kullback–Leibler and Wasserstein-1 at 283 (at five points the Wasserstein-1 precondition is missed by a heuristic threshold, by about 0.001). This result is largely determined by the design: at κ = 0
 the hot state has no overlap with the odd slowest mode (what Klich et al. call the strong Mpemba effect), and at κ ≠ 0 (up to 0.1) the overlap ratio to the cold state stays between 0.003 and 0.43 at the 168 points where it was
@@ -65,8 +67,9 @@ to 0.0005). Two margins are thin: 1.3× for the simulation cross-check of λ₁ 
 
 ## 3. Pre-specified protocol
 
-Criteria were committed to local version control before the corresponding code and runs, except where the Appendix says otherwise. All commits are on one machine, dated the same day, and have not been pushed to an external timestamping
-service; the ordering therefore cannot at present be verified by a third party.
+Criteria were committed to local version control before the corresponding code and runs, except where the Appendix says otherwise. All commits were made on one machine, dated the same day. The repository was pushed to GitHub and made public
+on 2026-09-29, after all analyses in this note were complete — GitHub's own commit and push timestamps postdate every run, so pushing does not establish that the pre-specification preceded the code it governs; that ordering rests on the
+commit dates themselves (Appendix), which were not independently timestamped by a third party before the corresponding run.
 
 **P0 (a heuristic filter, not a theorem), applied per metric.** In a given metric the hot state must start at least 1.25 times as far from equilibrium as the cold state; a point failing it is labelled NO_TEST, never "no effect". The frozen text defined
 P0 jointly (KL and W1); the labelling below applies it per metric (KL at 288 points, W1 at 283), while the decision rule K1 uses points where it holds in both. The value 1.25 is uncalibrated.
@@ -106,9 +109,10 @@ correction of a margin statistic (Section 4). Their definitions are in `PREREG_v
 
 **Main run.** KL: EFFECT at 288 of 288 points. W1: EFFECT at 283 and NO_TEST at 5 (all at κ = 0.1, P0 ratios of 1.249 against the threshold 1.25 — a miss of about 0.001). K1 passed (72 of 72 at κ = 0), K2 passed (the five "KL-only" points are those NO_TEST
 points), G3, G4 and G5 (168 of 168 at κ ≠ 0) passed. *Margins.* The ratio gap/(5·error) exceeds 1 at t* by definition (minimum 1.001, median 2.26 in KL), so a minimum over a window that includes t* is uninformative. The informative statistics: the median
-ratio over the sustained window is at least 165 in KL and 377 in W1 at every point (records are geometrically spaced, so this weights early times); at least 99.5% of window records have ratio ≥ 2; and the ratio at the last valid time is at least 1.7 in KL and 1.9
+ratio over the sustained window is at least 164.8 in KL and 377 in W1 at every point (records are geometrically spaced, so this weights early times); at least 99.5% of window records have ratio ≥ 2; and the ratio at the last valid time is at least 1.68 in KL and 1.88
 in W1, in the deepest wells (b = 5, T = 0.05), where λ₁ is only a first-passage estimate and t_max is about 10⁴³. An earlier version of this note and of the results file called that 1.68 "the smallest margin over the discretisation error"; the number is the
-correct smallest late-time ratio, but it is not a minimum margin and the description was wrong (the window it was computed over had also excluded t*). A check at dx = 0.0025 at the five points with the smallest late-time ratio (all at b/T ≥ 50; rule fixed before the
+correct smallest late-time ratio, but it is not a minimum margin and the description was wrong (the window it was computed over had also excluded t*). (A subsequent version of this note itself rounded 1.68 and 1.88 up to "1.7" and "1.9" and stated them as a
+lower bound rather than the exact minimum — a fourth-pass review caught this; the numbers here are now exact, not rounded.) A check at dx = 0.0025 at the five points with the smallest late-time ratio (all at b/T ≥ 50; rule fixed before the
 run) kept EFFECT in KL and W1 at all five, changed the gap D_cold − D_hot by at most 1.0%, and gave differences between the two finest grids 7–11 times smaller than the main run's error estimate (which has spatial and time-Richardson parts), so that
 estimate is conservative. t*/t_max ranges from 7·10⁻⁴⁵ to 1.7·10⁻² (KL): the crossing occurs on the fast intra-well timescale against a metastable population imbalance.
 
@@ -129,12 +133,15 @@ state unchanged).** P0 in KL holds in all 225 runs (KL P0 is not a real filter h
 does not probe r > 1.
 
 **Other observables (descriptive).** At κ = 0 the cold state of this note sits exactly at the equilibrium value of ⟨U⟩ (its distance is 3·10⁻¹⁷, round-off), so the energy comparison is degenerate there: "energy shows no crossing" cannot be tested with these states at
-κ = 0. At κ ≠ 0, ⟨U⟩ crosses at 216 of 216 points and Var(x) at 288 of 288.
+κ = 0. At κ ≠ 0, ⟨U⟩ crosses at 216 of 216 points and Var(x) at 288 of 288, but the near-degeneracy recurs, just weaker, at the smallest tilt: at κ = 0.02 the P0 ratio D_hot(0)/D_cold(0) for ⟨U⟩ is 5.8·10³–1.4·10⁴ (`u_p0`, `summary_main.csv`) —
+orders of magnitude above the 1.25 threshold, which here means the cold state's ⟨U⟩ starts essentially at its own equilibrium value (a small-κ echo of the exact κ = 0 degeneracy above), not that the test is close to failing. No P0-style filter was applied
+to ⟨U⟩ or Var(x) in this run, so the 216/216 and 288/288 counts include points where the comparison is close to degenerate in this sense.
 
 ## 5. Case study: the earlier analysis
 
 **The earlier metric.** For each observable O the earlier analysis took O_eq as the mean of the last 10% of the two compared trajectories, computed gap_v1 = D_hot − D_cold along the run (the sign convention is opposite to Section 3) and reported the fraction of recorded time
-with gap_v1 < 0 ("% crossed"). It did not check that the hot state started farther. For p_left the equilibrium is 0.5 at κ = 0 and the earlier grid had κ = 0 only; a cold state fully in one well starts at the maximal distance 0.5, so with the analytic equilibrium P0 is
+with gap_v1 < 0 ("% crossed"). The earlier draft's own prose (§II.D) states the required initial-ordering check; its code (`run_phase_diagram.py`) does not implement it — `crossed_pct` is computed directly from `gap`, with no test on the
+initial distances. For p_left the equilibrium is 0.5 at κ = 0 and the earlier grid had κ = 0 only; a cold state fully in one well starts at the maximal distance 0.5, so with the analytic equilibrium the initial-ordering condition is
 unsatisfiable for any hot state (0 of 72 points; with the tail-estimated equilibrium it fails for this hot state, not structurally). With tilt this argument no longer holds.
 
 **Ablation on noise-free numerical trajectories (72 points, κ = 0, the earlier initial states, x marginal; ranges over four implicit-Euler time steps h = 0.05, 0.025, 0.0125, 0.00625 per recorded interval of 0.25):**
@@ -156,8 +163,9 @@ Rerun of the earlier process (Euler–Maruyama step η = 0.005, 30 000 steps, N 
 without clipping, five (N = 5000) or two (N = 50 000) seeds. Finite sample was supported at 1 of 4 points and clipping at 0 of 4 (threshold 3 of 4), so neither is supported; but the test could barely pass as specified, since two of the four points have almost no discrepancy to close, and "neither" is a
 result of the preset rule, not evidence against finite sample. (A first version used overlapping noise streams across seeds; the result was unchanged after fixing it. Without clipping at b = 5 up to 2.5% of particles diverge.) At the extreme point (b = 2, T = 0.05) N = 5000 gives 20.1 ± 44.6% (the earlier map: 20.0 ± 42.1) and N = 50 000
 gives 99.7% in both seeds, i.e. the bimodality collapses toward a deterministic value; at (b = 1.5, T = 0.05) it remains bimodal at N = 50 000 (two runs at 0.2% and 99.8%). *(ii) Degeneracy hypothesis (formulated after (i); its predictions were written into the analysis script before it ran but are not in the committed pre-specification).*
-With the equilibrium from the two tails, gap_v1 is (nearly) zero when both trajectories are stationary throughout the run (cold stuck near 0, hot at 0.5), so the metric returns the sign of noise or of round-off. At the 11 points where the noise-free max|gap_v1| < 10⁻⁶ the earlier ten-seed standard deviation is 51.4 points against 4.7 elsewhere and 100% of the individual
-earlier runs there lie at an extreme (< 10% or > 90%) — as predicted; the prediction that reproduction would be good away from those points failed (mean discrepancy there 19.8). At four of the 11 points max|gap_v1| ≈ 10⁻¹⁵, i.e. the noise-free value is decided by round-off; replacing those four by 50% changes the discrepancy statistics to Pearson 0.39, mean 22.6, 56 points above 70%.
+With the equilibrium from the two tails, gap_v1 is (nearly) zero when both trajectories are stationary throughout the run (cold stuck near 0, hot at 0.5), so the metric returns the sign of noise or of round-off. At the 11 points where the noise-free max|gap_v1| < 10⁻⁶ the earlier ten-seed standard deviation has median 51.4 points (mean 48.7) against a median 4.7 elsewhere (mean 7.7) and 100% of the individual
+earlier runs there lie at an extreme (< 10% or > 90%) — as predicted; the prediction that reproduction would be good away from those points failed (mean discrepancy there 19.8). Four points just above the 10⁻⁶ threshold are also bimodal in this sense (SD 40.5–46.9:
+(b,T) = (1.5, 0.1), (0.7, 0.05), (5, 0.3), (3, 0.2)), so the threshold does not mark a sharp boundary. At four of the 11 degenerate points max|gap_v1| ≈ 10⁻¹⁵, i.e. the noise-free value is decided by round-off; replacing those four by 50% changes the discrepancy statistics to Pearson 0.39, mean 22.6, 56 points above 70%.
 *(iii) Post-hoc noise-floor model (formulated after (ii) partly failed).* Records with |gap_v1| ≤ θ are counted as 50% (in expectation; in single runs the sign is largely fixed through the tail-estimated equilibrium) and the others deterministically, with θ = 0.02 from the sampling noise of the difference of two fractions of 5000 particles (≈ 2√2·√(0.25/5000)), not fitted. It gives a mean
 discrepancy of 8.8 points (Pearson 0.71; 6.9–9.8 for θ from 0.005 to 0.03) against baselines of 18.5 (the map's mean everywhere), 19.1 (50% at the 11 degenerate points, noise-free metric elsewhere) and 9.9 for a shrinkage baseline, (1 − f)·noise-free + 50·f with f the fraction of records with |gap_v1| ≤ 0.02. Stratified: at the 11 degenerate points
 15.4 for the model and the two hybrid baselines (target noise floor 12.3); at the other 61 points 7.6 for the model and 8.9 for shrinkage, against a noise floor of 1.9. At 57 of 72 points more than half of the records have |gap_v1| ≤ 0.02 (this set overlaps the set of 57 points above 70% in 42 points). The model is therefore a descriptive fit with little advantage over shrinkage and about four times the noise floor at
@@ -170,20 +178,23 @@ reproducing the earlier count of points above 70% for energy (5 of 72); the earl
 
 ## 6. Limitations
 
-One-dimensional (x-marginal) reduction; two families of hot and cold states; a single potential family; Markovian overdamped dynamics; KL and W1 as headline metrics; the hot-state sweep at b/T = 10 only and never with r > 1 except in G5b. Thresholds are preset heuristics (Section 3); P0 was missed by 0.001 at five points. Two grid levels cannot confirm the convergence order; a dx = 0.0025
+One-dimensional (x-marginal) reduction; two families of hot and cold states; a single potential family; Markovian overdamped dynamics; KL and W1 as headline metrics. The frozen pre-specification also lists total variation (TV) as a checking metric alongside W1
+(`PREREG_v2.md`); it was never computed — an undisclosed departure from the plan, not a deliberate choice, corrected here (`PREREG_v2.md` D2.11). The hot-state sweep at b/T = 10 only and never with r > 1 except in G5b. Thresholds are preset heuristics (Section 3); P0 was missed by 0.001 at five points. Two grid levels cannot confirm the convergence order; a dx = 0.0025
 check at five points is reported in Section 4. For b/T > 12 (64 points) λ₁ is a first-passage estimate validated only where an eigenvalue computation is possible, and R was not evaluated (at κ ≠ 0 at 48 of those points). The cross-check against simulation used three points at κ = 0. The agreement of R with the direct calculation is a consistency check. The reproduction of the earlier metric depends on the
 numerical time step at the level of a few points. The pre-specification is local, from one session, and its author is the assistant that also ran it. The code was reviewed by AI reviewers reading the code (verdicts on the solver and on the analysis code: LGTM after fixes; a later review of the post-hoc analysis scripts returned NEEDS_WORK, and its findings are addressed above where they affect quoted numbers); the reviewers could not always run their own probes; there is
 no independent human replication.
 
 ## 7. Conclusion
 
-In this model a symmetric hot state crosses a one-well cold state wherever the precondition holds. At κ = 0 this is because its slowest-mode coefficient vanishes by symmetry (the strong Mpemba effect in the sense of Klich et al.); at κ ≠ 0 up to 0.1 it is because the overlap with the slowest mode is small (r ≤ 0.43 where evaluated). The result is largely determined by the design and is not new.
+In this model, on the tested grid (b/T from 0.1 to 100, κ up to 0.1) and with the tested hot-state family (a wide Gaussian passing rule H, or the σ = 3 swept states), a symmetric hot state crosses a one-well cold state wherever the precondition holds. At κ = 0 this is because its slowest-mode coefficient vanishes by symmetry (the strong Mpemba effect in the sense of Klich et al.); at κ ≠ 0 up to 0.1 it is because the overlap with the slowest mode is small (r ≤ 0.43 where evaluated). The result is largely determined by the design and is not new.
 The earlier reported crossing was produced by a metric with no check that the hot state starts farther, which by itself yields a "crossing" for p_left at κ = 0; the earlier phase map remains only qualitatively understood (degeneracy and sub-noise sign flips are candidate mechanisms, not validated ones); and the earlier energy claim was not assessed with its own states. Checks that follow from this one case: verify the initial
 ordering (P0); use an analytic or independently converged equilibrium; ask whether the observable's distance can exceed the cold state's initial distance; test for degeneracy when the cold state already sits at the observable's equilibrium value; check that a metric evaluated on noise-free data is stable under the time step; and include a control the metric must fail.
 
 ## Data and code availability
 
-[Repository URL and archive DOI to be supplied by the author. At present the repository is local only: the tag `prereg-v2-frozen` and all commits have not been pushed to any remote.] Per-configuration summary: `prereg_v2/summary_main.csv`; manifest with SHA-256 of the 288 curve files: `prereg_v2/out_manifest.csv`; sweep: `prereg_v2/summary_robustness.csv`; comparison with the earlier map: `prereg_v2/v1_compare_points.csv`.
+Repository: https://github.com/sergeeey/infompemba-langevin-crossing (branch `feature/prereg-v2`, tag `prereg-v2-frozen`). [Archive DOI to be supplied by the author once minted; see `ZENODO_SETUP.md` in the repository.] Per-configuration summary: `prereg_v2/summary_main.csv`; manifest with SHA-256 of the 288 curve files: `prereg_v2/out_manifest.csv`; sweep: `prereg_v2/summary_robustness.csv`; comparison with the earlier map: `prereg_v2/v1_compare_points.csv`; the four time-step
+variants of the reproduction underlying the ranges in Section 5: `prereg_v2/cmp_sub{5,10,20,40}.csv`. **Not deposited:** the 288 per-configuration curve files (`prereg_v2/out/*.npz`, about 42 MB, listed by hash in `out_manifest.csv` but excluded
+from the repository by size) — the main-run numbers in Sections 4–5 that read directly from these files (e.g. the margin statistics) cannot be regenerated from the deposit alone without rerunning `run_prereg_v2_main.py`.
 
 ## References (identifiers verified in OpenAlex/Crossref; see `prereg_v2/N1_LITERATURE.md`)
 
@@ -201,7 +212,7 @@ ordering (P0); use an analytic or independently converged equilibrium; ask wheth
 - W. K. Grassmann, M. I. Taksar and D. P. Heyman, Oper. Res. 33, 1107 (1985), doi:10.1287/opre.33.5.1107 [title and DOI verified; authors from memory].
 - [Other references of the earlier draft are to be re-verified by the author before use; item 9 there has an erratum, Phys. Rev. Lett. 128, 229901 (2022); items 4 and 11 could not be verified.]
 
-## Appendix: timeline of the pre-specification (local git, one machine, one session, not pushed)
+## Appendix: timeline of the pre-specification (local git, one machine; the repository was pushed and made public only after this timeline was complete, on 2026-09-29)
 
 `3e002b6` baseline; `db3de4a` tag `prereg-v2-frozen` (criteria, P0, K0–K4); `2ac799e` solver-method deviation and validation tolerances (before the solver code); `ce807a5` solver and validation gates; `7d71290`, `dc145c9` main-run protocol, controls and spectral criterion (before the corresponding code and runs); `bde4119` (sweep), `6c96eb9`
 (attribution, W1 control, equivalence check), `52b6d7b` (margin correction and refinement check), each before its code. Tolerances for the simulation cross-check were written into the file before its code but committed together with it; the degeneracy predictions, the noise-floor model, the baselines and the time-step check were written into analysis scripts or results files, not into

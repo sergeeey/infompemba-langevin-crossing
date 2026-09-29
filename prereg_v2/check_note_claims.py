@@ -1,9 +1,18 @@
-"""Reconcile the numeric claims of paper/note_v2_draft.md with data recomputed from the saved outputs.
+"""Transcription-consistency check between paper/note_v2_draft.md and the saved pipeline outputs.
+
+This is NOT an independent re-derivation: most "recomputed" values below re-read the same cached pipeline
+columns (kl_label, r, c1_hot, pl_noise_model, pl_v1pct, v1_sd, ...) the note's numbers were themselves
+transcribed from, so it catches transcription/rounding errors and later text drift, not errors shared with
+the pipeline itself. Coverage is partial (not every claim in the note has a check here).
 
 Each check prints: claim (as stated in the note), recomputed value, OK/MISMATCH. Inputs: summary_main.csv,
 summary_robustness.csv, v1_compare_points.csv (h = 0.025), the four time-step variants of the reproduction
-(argument: directory with cmp_sub{5,10,20,40}.csv) and out/*.npz. Read-only. The 'note says' strings were transcribed from the note / RESULTS.md and grep-checked against them
-(2026-09-28); only the 'recomputed' values come from data.
+(argument: directory with cmp_sub{5,10,20,40}.csv) and out/*.npz. Read-only. The 'note says' strings were
+transcribed from the note / RESULTS.md and grep-checked against them (2026-09-28); only the 'recomputed'
+values come from data. A 4th-pass skeptic review (2026-09-29) found the bound checks below used narrow
+two-sided windows instead of one-sided ">=" comparisons, which let the note's rounded "1.7"/"1.9" pass
+despite the true minima being 1.68/1.88 — fixed below to compare against the note's own stated one-sided
+bound directly.
 """
 
 import csv
@@ -117,7 +126,7 @@ chk(
     "224 eig / 64 quad",
     f"{(M.lam_src == 'eig').sum()} / {(M.lam_src == 'quad').sum()}",
 )
-chk("KL P0 min ratio", M.kl_p0.min() > 30, ">= 30.5", f"{M.kl_p0.min():.1f}")
+chk("KL P0 min ratio", M.kl_p0.min() >= 30.4, ">= 30.4 (exactly 30.4557)", f"{M.kl_p0.min():.4f}")
 chk(
     "energy at kappa=0 degenerate",
     (k0.u_p0 > 1e12).all(),
@@ -157,8 +166,8 @@ for r in rows:
             at_t.append(q[0])
 chk(
     "median ratio over window min (KL, W1)",
-    min(med["kl"]) > 164 and min(med["w1"]) > 376,
-    ">= 165, >= 377",
+    min(med["kl"]) >= 164.8 and min(med["w1"]) >= 377,
+    ">= 164.8, >= 377",
     f"{min(med['kl']):.1f}, {min(med['w1']):.1f}",
 )
 chk(
@@ -169,8 +178,8 @@ chk(
 )
 chk(
     "late-time ratio min (KL, W1)",
-    1.65 < min(late["kl"]) < 1.75 and 1.85 < min(late["w1"]) < 1.95,
-    ">= 1.7, >= 1.9",
+    min(late["kl"]) >= 1.68 and min(late["w1"]) >= 1.88,
+    ">= 1.68, >= 1.88",
     f"{min(late['kl']):.2f}, {min(late['w1']):.2f}",
 )
 chk(
@@ -180,7 +189,7 @@ chk(
     f"{min(at_t):.3f} / {np.median(at_t):.2f}",
 )
 cells = ((M["T"] / (8 * M["b"])) ** 0.5 / 0.005).min()
-chk("cells per well width at dx=0.005", 7.0 < cells < 7.2, ">= 7", f"{cells:.2f}")
+chk("cells per well width at dx=0.005", cells >= 7.0, ">= 7", f"{cells:.2f}")
 
 print("\n=== hot-family sweep (summary_robustness.csv) ===")
 S = pd.read_csv("prereg_v2/summary_robustness.csv")

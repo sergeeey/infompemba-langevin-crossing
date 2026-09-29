@@ -35,18 +35,24 @@ a release made before that will NOT be picked up automatically. So:
 
 1. Finish step 1 and step 2 first.
 2. Then create a GitHub Release (Releases → "Draft a new release"), either reusing the
-   existing tag `prereg-v2-frozen` or a new tag for the reconciled state (current HEAD
-   `62e8051`). Title and notes are free text; Zenodo pulls its metadata primarily from
+   existing tag `prereg-v2-frozen` or a new tag pointing at the branch's current HEAD
+   (check `git log -1` — do not hardcode a commit hash in this file, it goes stale
+   immediately). Title and notes are free text; Zenodo pulls its metadata primarily from
    `CITATION.cff`.
 3. Publishing the release triggers Zenodo to archive that snapshot and mint a DOI. The
    DOI page appears at https://zenodo.org/account/settings/github/repository/sergeeey/infompemba-langevin-crossing
    a few minutes after.
 4. Optional: add the resulting DOI badge to `README.md` and the DOI itself to
-   `paper/note_v2_draft.md` line 186 (currently a placeholder).
+   `paper/note_v2_draft.md`'s Data and code availability section (currently a placeholder).
 
 ## What the assistant did already (2026-09-29)
 
 - Made `sergeeey/infompemba-langevin-crossing` public on GitHub (was private).
-- Added `CITATION.cff` with placeholder author/license/date fields.
+- Added `CITATION.cff` (author, affiliation, email, license: MIT all resolved by the
+  author; `date-released` is the one remaining placeholder, set it at actual release
+  time) and `LICENSE` (MIT).
+- Found and removed `paper/endorser_emails.md` from the entire git history (real
+  third-party emails were exposed when the repo went public) — see `PREREG_v2.md` D2.11
+  and `prereg_v2/EXECUTION_LOG.md` (2026-09-29 entry) for the incident record.
 - Did not create a GitHub Release and did not touch Zenodo — both require the
   author's own action per the steps above.
