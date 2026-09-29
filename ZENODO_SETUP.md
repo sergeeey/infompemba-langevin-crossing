@@ -1,0 +1,48 @@
+# Archiving this repository on Zenodo — steps for the author
+
+Prepared 2026-09-29; not yet done by the assistant, since each step below needs the
+author's own login or an author decision. See PENDING items marked `[AUTHOR]`.
+
+## 1. Before enabling Zenodo (author decisions, not yet made)
+
+- `[AUTHOR]` Settle the author name: the earlier draft's files say "Sergei Boiko", this
+  repository's git configuration says "Sergey Boyko" (see `paper/note_v2_draft.md` line 6
+  and `CITATION.cff`).
+- `[AUTHOR]` Fill in `CITATION.cff` (name, email, date-released) and choose a license
+  (add a `LICENSE` file — Zenodo requires one to set the deposit's own license).
+- `[AUTHOR]` Decide the venue / whether this is ready to be citable at all: the note
+  (`paper/note_v2_draft.md`) has not had a 4th skeptic pass, and references [4] and [11]
+  are unverified (`prereg_v2/N1_LITERATURE.md` §5). A Zenodo DOI, once minted, is very
+  hard to fully retract — Zenodo's own policy is that a deposit can be closed/removed
+  in exceptional cases but the DOI record persists. Treat "create the release" as the
+  actual publication step, not this preparation.
+
+## 2. Link GitHub and Zenodo (must be done by the author — needs your login/OAuth)
+
+1. Go to https://zenodo.org/ and log in ("Log in with GitHub").
+2. Go to https://zenodo.org/account/settings/github/ (GitHub tab under your account).
+3. Find `sergeeey/infompemba-langevin-crossing` in the repository list and flip its
+   toggle **on**. If it is not listed, click "Sync now".
+
+## 3. Create the GitHub release (only after step 2 — order matters)
+
+Zenodo only archives releases created *after* the repository toggle is switched on;
+a release made before that will NOT be picked up automatically. So:
+
+1. Finish step 1 and step 2 first.
+2. Then create a GitHub Release (Releases → "Draft a new release"), either reusing the
+   existing tag `prereg-v2-frozen` or a new tag for the reconciled state (current HEAD
+   `62e8051`). Title and notes are free text; Zenodo pulls its metadata primarily from
+   `CITATION.cff`.
+3. Publishing the release triggers Zenodo to archive that snapshot and mint a DOI. The
+   DOI page appears at https://zenodo.org/account/settings/github/repository/sergeeey/infompemba-langevin-crossing
+   a few minutes after.
+4. Optional: add the resulting DOI badge to `README.md` and the DOI itself to
+   `paper/note_v2_draft.md` line 186 (currently a placeholder).
+
+## What the assistant did already (2026-09-29)
+
+- Made `sergeeey/infompemba-langevin-crossing` public on GitHub (was private).
+- Added `CITATION.cff` with placeholder author/license/date fields.
+- Did not create a GitHub Release and did not touch Zenodo — both require the
+  author's own action per the steps above.

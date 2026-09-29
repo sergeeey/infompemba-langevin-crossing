@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this repository, cite it as below. AUTHOR NAME AND EMAIL BELOW ARE PLACEHOLDERS: fill them in before creating the release that Zenodo will archive (see paper/note_v2_draft.md line 6 for the same unresolved decision)."
+title: "A Mpemba \"crossing\" that the metric could not test: an audit of an earlier analysis and a pre-specified re-analysis of a double-well Langevin model"
+type: software
+authors:
+  - family-names: "PLACEHOLDER-FAMILY-NAME"
+    given-names: "PLACEHOLDER-GIVEN-NAME"
+    # The earlier draft's files say "Sergei Boiko"; the git configuration of this
+    # repository says "Sergey Boyko". Settle this before release (author decision).
+    email: "PLACEHOLDER@EXAMPLE.INVALID"
+license: "PLACEHOLDER — no license chosen yet; see repository root for a LICENSE file once added"
+repository-code: "https://github.com/sergeeey/infompemba-langevin-crossing"
+version: "0.4.0-draft"
+date-released: "PLACEHOLDER-YYYY-MM-DD"
+keywords:
+  - "Mpemba effect"
+  - "Langevin dynamics"
+  - "Fokker-Planck equation"
+  - "pre-registration"
+  - "falsification"
