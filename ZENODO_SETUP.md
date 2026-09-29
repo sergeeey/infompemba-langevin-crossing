@@ -8,9 +8,12 @@ author's own login or an author decision. See PENDING items marked `[AUTHOR]`.
 - ~~Settle the author name~~ — **done 2026-09-29**: "Sergey Boyko" (git-config spelling),
   affiliation "Independent researcher, Almaty, Kazakhstan", email sergeikuch80@gmail.com.
   Filled into `CITATION.cff` and `paper/note_v2_draft.md` line 6.
+- ~~Choose a license~~ — **done 2026-09-29**: MIT (`LICENSE` at repo root, `CITATION.cff`
+  `license: MIT`). Covers the code; the note text (`paper/note_v2_draft.md`) is not
+  separately licensed — MIT applies to the whole repository as-is. If a text-specific
+  license (e.g. CC-BY-4.0 for the prose) is wanted later, add a second file for it.
 - `[AUTHOR]` `CITATION.cff` still needs `date-released` (set it when the release is
-  actually made) and a chosen license (add a `LICENSE` file — Zenodo requires one to
-  set the deposit's own license).
+  actually made).
 - `[AUTHOR]` Decide the venue / whether this is ready to be citable at all: the note
   (`paper/note_v2_draft.md`) has not had a 4th skeptic pass, and references [4] and [11]
   are unverified (`prereg_v2/N1_LITERATURE.md` §5). A Zenodo DOI, once minted, is very

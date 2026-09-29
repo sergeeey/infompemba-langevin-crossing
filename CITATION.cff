@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this repository, cite it as below. LICENSE and date-released are still placeholders: fill them in before creating the release that Zenodo will archive."
+message: "If you use this repository, cite it as below. date-released is still a placeholder: set it when the release that Zenodo will archive is actually created."
 title: "A Mpemba \"crossing\" that the metric could not test: an audit of an earlier analysis and a pre-specified re-analysis of a double-well Langevin model"
 type: software
 authors:
@@ -10,7 +10,7 @@ authors:
     # git-config spelling (see paper/note_v2_draft.md line 6 for the same decision).
     affiliation: "Independent researcher, Almaty, Kazakhstan"
     email: "sergeikuch80@gmail.com"
-license: "PLACEHOLDER — no license chosen yet; see repository root for a LICENSE file once added"
+license: MIT
 repository-code: "https://github.com/sergeeey/infompemba-langevin-crossing"
 version: "0.4.0-draft"
 date-released: "PLACEHOLDER-YYYY-MM-DD"
