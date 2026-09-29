@@ -6,7 +6,9 @@ author's own login or an author decision. See PENDING items marked `[AUTHOR]`.
 ## 1. Before enabling Zenodo (author decisions)
 
 - ~~Settle the author name~~ — **done 2026-09-29**: "Sergey Boyko" (git-config spelling),
-  affiliation "Independent researcher, Almaty, Kazakhstan", email sergeikuch80@gmail.com.
+  affiliation "Ronin Institute for Independent Scholarship", email sergey.boyko@ronininstitute.org,
+  ORCID 0009-0009-2178-5701 (updated later the same day from "Independent researcher, Almaty" + gmail,
+  after the Obsidian vault showed the Ronin affiliation is the intended one).
   Filled into `CITATION.cff` and `paper/note_v2_draft.md` line 6.
 - ~~Choose a license~~ — **done 2026-09-29**: MIT (`LICENSE` at repo root, `CITATION.cff`
   `license: MIT`). Covers the code; the note text (`paper/note_v2_draft.md`) is not

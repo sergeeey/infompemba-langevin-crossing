@@ -8,8 +8,9 @@ authors:
     # Settled 2026-09-29: the earlier draft's files said "Sergei Boiko", the git
     # configuration of this repository said "Sergey Boyko" -- the author chose the
     # git-config spelling (see paper/note_v2_draft.md line 6 for the same decision).
-    affiliation: "Independent researcher, Almaty, Kazakhstan"
-    email: "sergeikuch80@gmail.com"
+    affiliation: "Ronin Institute for Independent Scholarship"
+    email: "sergey.boyko@ronininstitute.org"
+    orcid: "https://orcid.org/0009-0009-2178-5701"
 license: MIT
 repository-code: "https://github.com/sergeeey/infompemba-langevin-crossing"
 version: "0.4.0-draft"

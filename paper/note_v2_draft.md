@@ -4,7 +4,7 @@
 **Intended venue class:** an archival correction note (e.g. Zenodo, possibly with a replacement/withdrawal notice for the earlier draft). The frozen pre-specification (rule K3, written in Russian; the quotation below is the author's own translation) sets exactly this ceiling: "not submitted as new work; at most a note that presents the result as a numerical illustration". Sending this to a research journal would need a declared deviation from that rule.
 
 **Author:** Sergey Boyko (settled 2026-09-29; the earlier draft's files said "Sergei Boiko", the git configuration said "Sergey Boyko" — the author chose the git-config spelling)
-**Affiliation:** Independent researcher, Almaty, Kazakhstan **Correspondence:** sergeikuch80@gmail.com
+**Affiliation:** Ronin Institute for Independent Scholarship **Correspondence:** sergey.boyko@ronininstitute.org **ORCID:** 0009-0009-2178-5701
 **AI-assistance disclosure:** [text required by the target venue. The analysis code, the numerical validation, the pre-specification and the drafting of this note were all produced with one AI coding assistant (Claude) on one machine, under the author's direction, across several working sessions between 2026-09-28 and 2026-09-29 (the later sessions made metadata and cross-check additions and this fourth-pass revision; they did not rerun the underlying numerical pipeline); reviewers were also AI agents. The venue's policy has not been checked.]
 **Status of the earlier draft and its data:** [AUTHOR TO STATE whether the earlier draft was ever posted or circulated. Section 5 quotes figures from it and from its result files (`results/phase_diagram.parquet`); a reader can check them only if both are deposited with this note.]
 
