@@ -5,3 +5,4 @@ __pycache__/
 .claude/
 .qwen/
 prereg_v2/out/
+deposit_staging/

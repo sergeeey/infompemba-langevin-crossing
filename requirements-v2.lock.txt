@@ -1,0 +1,7 @@
+# Exact versions on the machine that produced the stored results (Windows 11, 24 cores). Python 3.13.2.
+numpy==2.3.4
+scipy==1.16.3
+numba==0.62.1
+llvmlite==0.45.1
+pandas==2.3.3
+pytest==8.4.2

@@ -1,0 +1,29 @@
+{
+  "title": "A Mpemba \"crossing\" that the metric could not test: an audit of an earlier analysis and a pre-specified re-analysis of a double-well Langevin model",
+  "upload_type": "software",
+  "description": "<p>Code, tests, tables and a draft correction note for a re-analysis of a claimed Mpemba-like crossing in an overdamped Langevin double-well model. The earlier draft's detector did not apply its own initial-ordering condition; a pre-specified, validated one-dimensional Fokker&ndash;Planck re-analysis shows a crossing that is a known, largely design-determined mechanism (not a new result).</p><p><b>Status: draft, not peer reviewed; no independent human replication.</b> The work was done with AI assistance (see the note's disclosure). Start with <code>REPRODUCE.md</code> and <code>paper/note_v2_draft.md</code>. The public git history was rewritten once on 2026-09-29 (see <code>HISTORY_REWRITE.md</code>).</p>",
+  "creators": [
+    {
+      "name": "Boyko, Sergey",
+      "affiliation": "Ronin Institute for Independent Scholarship",
+      "orcid": "0009-0009-2178-5701"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Mpemba effect",
+    "Langevin dynamics",
+    "Fokker-Planck equation",
+    "pre-registration",
+    "falsification",
+    "correction note"
+  ],
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://github.com/sergeeey/infompemba-langevin-crossing",
+      "scheme": "url"
+    }
+  ]
+}

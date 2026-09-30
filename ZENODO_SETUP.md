@@ -1,60 +1,31 @@
-# Archiving this repository on Zenodo — steps for the author
+# Archiving on Zenodo: state and remaining steps (updated 2026-09-30)
 
-Prepared 2026-09-29; not yet done by the assistant, since each step below needs the
-author's own login or an author decision. See PENDING items marked `[AUTHOR]`.
+## Done
 
-## 1. Before enabling Zenodo (author decisions)
+- Zenodo account linked; this repository switched on in the GitHub integration.
+- Release `prereg-v2-frozen` (tag at the freeze commit `5cd352b`) archived as **version 10.5281/zenodo.23039440**;
+  the **concept DOI for all versions is 10.5281/zenodo.23039439** (cite this one in running text).
+  That record was built from a tree that predates `CITATION.cff`/`LICENSE`, so its **metadata are wrong**
+  (author shown as "C", automatic title, no licence). Its files cannot be changed; its metadata can be edited.
+- `CITATION.cff`, `.zenodo.json` (record metadata for the next release), `LICENSE` (MIT), `REPRODUCE.md`,
+  `requirements-v2.txt`, `HISTORY_REWRITE.md` are in the tree for the next release.
+- Curve archive prepared (not yet uploaded): `deposit_staging/infompemba_prereg_v2_main_run_curves.zip`
+  (42.5 MB, SHA-256 `b1cd3ec0e220bea87888a09afbf8e2bea29a705348c2462145ffd5a873bd0229`, every file verified against
+  `prereg_v2/out_manifest.csv`). `deposit_staging/` is git-ignored.
 
-- ~~Settle the author name~~ — **done 2026-09-29**: "Sergey Boyko" (git-config spelling),
-  affiliation "Ronin Institute for Independent Scholarship", email sergey.boyko@ronininstitute.org,
-  ORCID 0009-0009-2178-5701 (updated later the same day from "Independent researcher, Almaty" + gmail,
-  after the Obsidian vault showed the Ronin affiliation is the intended one).
-  Filled into `CITATION.cff` and `paper/note_v2_draft.md` line 6.
-- ~~Choose a license~~ — **done 2026-09-29**: MIT (`LICENSE` at repo root, `CITATION.cff`
-  `license: MIT`). Covers the code; the note text (`paper/note_v2_draft.md`) is not
-  separately licensed — MIT applies to the whole repository as-is. If a text-specific
-  license (e.g. CC-BY-4.0 for the prose) is wanted later, add a second file for it.
-- `[AUTHOR]` `CITATION.cff` still needs `date-released` (set it when the release is
-  actually made).
-- `[AUTHOR]` Decide the venue / whether this is ready to be citable at all: the note
-  (`paper/note_v2_draft.md`) has not had a 4th skeptic pass, and references [4] and [11]
-  are unverified (`prereg_v2/N1_LITERATURE.md` §5). A Zenodo DOI, once minted, is very
-  hard to fully retract — Zenodo's own policy is that a deposit can be closed/removed
-  in exceptional cases but the DOI record persists. Treat "create the release" as the
-  actual publication step, not this preparation.
+## Remaining steps, in this order (each is a public action and needs the author's explicit go)
 
-## 2. Link GitHub and Zenodo (must be done by the author — needs your login/OAuth)
+1. **Push** the local commits of steps A/B to GitHub (plain fast-forward).
+2. **Upload the curve dataset** as its own Zenodo record (upload type: dataset; author, ORCID, licence as in `.zenodo.json`;
+   related identifier "is supplement to" the software concept DOI). Put its DOI into the note
+   ("Data and code availability") and `REPRODUCE.md` section 3.
+3. **Edit the metadata of the frozen-tag record** (10.5281/zenodo.23039440): creator Sergey Boyko (Ronin Institute, ORCID),
+   readable title, licence MIT. The DOI does not change.
+4. **Gates before the release that carries the note** (author): a human reads the note and the checks; someone other than the
+   author's workflow runs `REPRODUCE.md` sections 1-2 on another machine; the target venue's rule on AI-assisted work is
+   checked and the disclosure text approved; 24 hours between "ready" and sending.
+5. **New tag at the then-current HEAD and a GitHub release** -> Zenodo builds a new version under the same concept DOI, this time
+   with correct metadata from `.zenodo.json`. Then put the version DOI into the note and `CITATION.cff` (`date-released`).
 
-1. Go to https://zenodo.org/ and log in ("Log in with GitHub").
-2. Go to https://zenodo.org/account/settings/github/ (GitHub tab under your account).
-3. Find `sergeeey/infompemba-langevin-crossing` in the repository list and flip its
-   toggle **on**. If it is not listed, click "Sync now".
-
-## 3. Create the GitHub release (only after step 2 — order matters)
-
-Zenodo only archives releases created *after* the repository toggle is switched on;
-a release made before that will NOT be picked up automatically. So:
-
-1. Finish step 1 and step 2 first.
-2. Then create a GitHub Release (Releases → "Draft a new release"), either reusing the
-   existing tag `prereg-v2-frozen` or a new tag pointing at the branch's current HEAD
-   (check `git log -1` — do not hardcode a commit hash in this file, it goes stale
-   immediately). Title and notes are free text; Zenodo pulls its metadata primarily from
-   `CITATION.cff`.
-3. Publishing the release triggers Zenodo to archive that snapshot and mint a DOI. The
-   DOI page appears at https://zenodo.org/account/settings/github/repository/sergeeey/infompemba-langevin-crossing
-   a few minutes after.
-4. Optional: add the resulting DOI badge to `README.md` and the DOI itself to
-   `paper/note_v2_draft.md`'s Data and code availability section (currently a placeholder).
-
-## What the assistant did already (2026-09-29)
-
-- Made `sergeeey/infompemba-langevin-crossing` public on GitHub (was private).
-- Added `CITATION.cff` (author, affiliation, email, license: MIT all resolved by the
-  author; `date-released` is the one remaining placeholder, set it at actual release
-  time) and `LICENSE` (MIT).
-- Found and removed `paper/endorser_emails.md` from the entire git history (real
-  third-party emails were exposed when the repo went public) — see `PREREG_v2.md` D2.11
-  and `prereg_v2/EXECUTION_LOG.md` (2026-09-29 entry) for the incident record.
-- Did not create a GitHub Release and did not touch Zenodo — both require the
-  author's own action per the steps above.
+Order matters: Zenodo archives only releases created after the repository switch is on, from the tree of the tag, and reads
+metadata from files inside that tree. Do not hardcode commit hashes in this file.

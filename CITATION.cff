@@ -13,7 +13,8 @@ authors:
     orcid: "https://orcid.org/0009-0009-2178-5701"
 license: MIT
 repository-code: "https://github.com/sergeeey/infompemba-langevin-crossing"
-version: "0.4.0-draft"
+version: "0.5.0-draft"
+doi: "10.5281/zenodo.23039439"
 date-released: "PLACEHOLDER-YYYY-MM-DD"
 keywords:
   - "Mpemba effect"

@@ -1,0 +1,12 @@
+# Minimal CPU environment for the v2 re-analysis (solver, analysis, tests, checks).
+# The older requirements.txt belongs to the earlier GPU/ML experiments and is NOT needed here.
+#
+# Checked in two environments (both ran the 35 tests and the validation gates V1-V3):
+#   this project's machine : Python 3.13.2, numpy 2.3.4, scipy 1.16.3, numba 0.62.1, pandas 2.3.3, pytest 8.4.2
+#   an outside reviewer's  : Python 3.12.14, numpy 2.3.5, scipy 1.17.0, numba 0.67.0, pytest 9.1.1
+# Exact versions of the first environment: requirements-v2.lock.txt
+numpy>=1.26
+scipy>=1.11
+numba>=0.59
+pandas>=2.0
+pytest>=8.0
