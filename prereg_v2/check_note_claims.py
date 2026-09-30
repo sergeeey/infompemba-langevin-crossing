@@ -209,10 +209,55 @@ for s in (1.0, 1.5, 3.0):
     sub = mu2[(mu2.sigma == s) & (mu2.w1_label != "NO_TEST")]
     w[s] = (int((sub.w1_label == "EFFECT").sum()), len(sub))
 chk(
-    "W1 EFFECT / testable at |mu|=2",
+    "W1 EFFECT / testable at |mu|=2 (unmatched; no longer quoted in the note)",
     w == {1.0: (0, 20), 1.5: (10, 20), 3.0: (30, 30)},
     "0/20, 10/20, 30/30",
     str(w),
+)
+key = ["b", "T", "kappa", "mu"]
+piv = mu2.pivot_table(index=key, columns="sigma", values="w1_label", aggfunc="first")
+common = piv[piv.apply(lambda r: all(v != "NO_TEST" for v in r), axis=1)]
+cw = {sg: int((common[sg] == "EFFECT").sum()) for sg in (1.0, 1.5, 3.0)}
+chk(
+    "common-support W1 comparison at |mu|=2",
+    len(common) == 20 and cw == {1.0: 0, 1.5: 10, 3.0: 20},
+    "20 records; 0, 10, 20",
+    f"{len(common)}; {cw}",
+)
+cs = common.reset_index()
+cs["a"] = (cs["b"] / cs["T"]).round(9)
+n_cond = cs[["a", "kappa", "mu"]].drop_duplicates().shape[0]
+chk("distinct dimensionless conditions in the common set", n_cond == 4, "4", str(n_cond))
+extra3 = mu2[mu2.sigma == 3.0].set_index(key).drop(index=common.index, errors="ignore")
+chk(
+    "sigma=3 extra records all EFFECT",
+    len(extra3) == 10 and (extra3.w1_label == "EFFECT").all(),
+    "10, all EFFECT",
+    f"{len(extra3)}, {extra3.w1_label.value_counts().to_dict()}",
+)
+sig1 = mu2[(mu2.sigma == 1.0) & (mu2.w1_label != "NO_TEST")]
+chk(
+    "testable sigma=1 W1 records are all CROSSING_NO_MARGIN",
+    len(sig1) == 20 and (sig1.w1_label == "CROSSING_NO_MARGIN").all(),
+    "20, all CROSSING_NO_MARGIN",
+    str(sig1.w1_label.value_counts().to_dict()),
+)
+n_var = S[["kappa", "mu", "sigma"]].drop_duplicates().shape[0]
+n_ratio = (S["b"] / S["T"]).round(9).nunique()
+chk(
+    "sweep: 45 distinct (kappa, mu, sigma), one b/T",
+    n_var == 45 and n_ratio == 1,
+    "45; 1",
+    f"{n_var}; {n_ratio}",
+)
+ma = (M["b"] / M["T"]).round(9)
+n_pairs = M[["b", "T"]].drop_duplicates().shape[0]
+n_cfg = pd.concat([ma, M.kappa], axis=1).drop_duplicates().shape[0]
+chk(
+    "main run: 72 (b,T) pairs, 46 distinct b/T, 184 distinct (b/T, kappa)",
+    n_pairs == 72 and ma.nunique() == 46 and n_cfg == 184,
+    "72 / 46 / 184",
+    f"{n_pairs} / {ma.nunique()} / {n_cfg}",
 )
 narrow_test = S[(S.sigma < 3) & (S.w1_label != "NO_TEST")]
 chk(

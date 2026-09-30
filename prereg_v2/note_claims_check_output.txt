@@ -28,7 +28,13 @@
 [OK] 225 runs, P0 in KL: note says 225, all; recomputed 225, 225
 [OK] KL EFFECT by sigma: note says 55/65/75; recomputed {1.0: 55, 1.5: 65, 3.0: 75}
 [OK] W1 NO_TEST by sigma: note says 55/55/5; recomputed {1.0: 55, 1.5: 55, 3.0: 5}
-[OK] W1 EFFECT / testable at |mu|=2: note says 0/20, 10/20, 30/30; recomputed {1.0: (0, 20), 1.5: (10, 20), 3.0: (30, 30)}
+[OK] W1 EFFECT / testable at |mu|=2 (unmatched; no longer quoted in the note): note says 0/20, 10/20, 30/30; recomputed {1.0: (0, 20), 1.5: (10, 20), 3.0: (30, 30)}
+[OK] common-support W1 comparison at |mu|=2: note says 20 records; 0, 10, 20; recomputed 20; {1.0: 0, 1.5: 10, 3.0: 20}
+[OK] distinct dimensionless conditions in the common set: note says 4; recomputed 4
+[OK] sigma=3 extra records all EFFECT: note says 10, all EFFECT; recomputed 10, {'EFFECT': 10}
+[OK] testable sigma=1 W1 records are all CROSSING_NO_MARGIN: note says 20, all CROSSING_NO_MARGIN; recomputed {'CROSSING_NO_MARGIN': 20}
+[OK] sweep: 45 distinct (kappa, mu, sigma), one b/T: note says 45; 1; recomputed 45; 1
+[OK] main run: 72 (b,T) pairs, 46 distinct b/T, 184 distinct (b/T, kappa): note says 72 / 46 / 184; recomputed 72 / 46 / 184
 [OK] narrow states testable only at |mu|=2: note says only |mu|=2; recomputed [-2.0, 2.0]
 [OK] 30 no-margin runs, all |mu|=2, 20 with |r-1|<=0.05, r 0.87..0.97: note says 30 / |mu|=2 / 20 / 0.87..0.97; recomputed 30 / [2.0] / 20 / 0.871..0.971
 [OK] no-margin split by sigma: note says 20 (sigma=1), 10 (sigma=1.5); recomputed (20, 10)
@@ -58,4 +64,4 @@
 [OK] ablation B minimum x4: note says 99.2/88.0/25.5/99.3; recomputed [np.float64(99.2), np.float64(88.0), np.float64(25.5), np.float64(99.3)]
 [OK] first record gap<0 x4: note says 71/70/70/69; recomputed [71, 70, 70, 69]
 
-50 of 50 claims reproduced
+56 of 56 claims reproduced
