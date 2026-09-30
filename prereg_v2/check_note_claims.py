@@ -8,7 +8,7 @@ the pipeline itself. Coverage is partial (not every claim in the note has a chec
 Each check prints: claim (as stated in the note), recomputed value, OK/MISMATCH. Inputs: summary_main.csv,
 summary_robustness.csv, v1_compare_points.csv (h = 0.025), the four time-step variants of the reproduction
 (argument: directory with cmp_sub{5,10,20,40}.csv) and out/*.npz. Read-only. The 'note says' strings were
-transcribed from the note / RESULTS.md and grep-checked against them (2026-09-28); only the 'recomputed'
+transcribed from the note / RESULTS.md and grep-checked against them (2026-09-28; the common-support and distinct-configuration claims were added 2026-09-30); only the 'recomputed'
 values come from data. A 4th-pass skeptic review (2026-09-29) found the bound checks below used narrow
 two-sided windows instead of one-sided ">=" comparisons, which let the note's rounded "1.7"/"1.9" pass
 despite the true minima being 1.68/1.88 — fixed below to compare against the note's own stated one-sided

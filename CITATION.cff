@@ -14,6 +14,8 @@ authors:
 license: MIT
 repository-code: "https://github.com/sergeeey/infompemba-langevin-crossing"
 version: "0.5.0-draft"
+# Concept DOI (all versions). Only the frozen-tag snapshot (10.5281/zenodo.23039440) is minted so far; the DOI of the
+# version that contains this v0.5 note is added after its release.
 doi: "10.5281/zenodo.23039439"
 date-released: "PLACEHOLDER-YYYY-MM-DD"
 keywords:
