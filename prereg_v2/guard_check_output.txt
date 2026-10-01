@@ -1,0 +1,13 @@
+kl: problems found: 0
+w1: problems found: 0
+u: problems found: 72
+      38 x hot/cold distance ratio at t = 0 is >= 1e+12: cold distance at round-off level (degenerate)
+      20 x cold distance at t = 0 is not positive (degenerate: cold already at equilibrium)
+      14 x cold distance at t = 0 does not exceed its own error estimate (degenerate comparison)
+var: problems found: 0
+hot/cold distance ratio at t = 0, kl: n = 288 (cold distance > 0), min 30.46, max 3.259e+04
+hot/cold distance ratio at t = 0, w1: n = 288 (cold distance > 0), min 1.249, max 1.902
+hot/cold distance ratio at t = 0, var: n = 288 (cold distance > 0), min 7.419, max 6.495e+05
+hot/cold distance ratio at t = 0, u (kappa != 0): n = 216 (cold distance > 0), min 1130, max 1.435e+04
+hot/cold distance ratio at t = 0, u (kappa = 0): n = 52 (cold distance > 0), min 6.083e+17, max 1.628e+20
+kl/w1 labels changed by the guard: 0 (INVALID_INPUT label = 'INVALID_INPUT')

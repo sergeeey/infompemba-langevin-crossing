@@ -30,7 +30,7 @@ Do not use `requirements.txt` (that file is for the earlier GPU experiments; it 
 ## 2. Fast checks (minutes)
 
 ```bash
-python -m pytest -q tests                          # 35 tests: solver, classifier, counterexample chains
+python -m pytest -q tests                          # 45 tests (with the curve archive unpacked; 4 stored-curve tests are skipped without it)
 python run_gates_v2.py                             # solver validation V1-V3 (about a minute)
 python prereg_v2/counterexamples.py                # two small chains that bound what the spectral criterion R can claim
 python prereg_v2/check_note_claims.py prereg_v2    # 56 numeric statements of the note against the CSV tables and curves

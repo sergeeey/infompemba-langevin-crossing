@@ -1,5 +1,5 @@
 > **Read this first (2026-09-30).** The current work in this repository is a **correction note and re-analysis** of an earlier claim
-> of a "Mpemba-like crossing" in a double-well Langevin model: [`paper/note_v2_draft.md`](paper/note_v2_draft.md) (draft v0.5, not for
+> of a "Mpemba-like crossing" in a double-well Langevin model: [`paper/note_v2_draft.md`](paper/note_v2_draft.md) (draft v0.6, not for
 > submission; not a new result — the mechanism is known). Start with [`REPRODUCE.md`](REPRODUCE.md) to check or rerun it
 > (environment: `requirements-v2.txt`). The pre-specification is frozen at tag `prereg-v2-frozen`
 > (Zenodo snapshot of the frozen tag: 10.5281/zenodo.23039440; concept DOI for all versions: 10.5281/zenodo.23039439). The public git history was rewritten once on 2026-09-29: see [`HISTORY_REWRITE.md`](HISTORY_REWRITE.md).
