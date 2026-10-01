@@ -43,8 +43,9 @@ first (section 3); without it the margin block fails.
 ## 3. The stored curves (Level 1)
 
 The 288 per-configuration curves (`prereg_v2/out/*.npz`, about 42 MB) are not in the git tree. They are deposited
-separately; the DOI is given in the note's "Data and code availability" section once published (until then:
-[to be added]). Unpack the archive into `prereg_v2/out/` and run:
+as a Zenodo dataset, DOI 10.5281/zenodo.23077448 (all versions: 10.5281/zenodo.23077447), split into six zip parts because of an upload-size limit.
+Download all parts, unpack every part into `prereg_v2/` (each contains paths starting with `out/`), e.g.
+`for f in infompemba_prereg_v2_curves_part*.zip; do unzip -o "$f" -d prereg_v2/; done`, and run:
 
 ```bash
 python prereg_v2/verify_manifest.py     # SHA-256 of all 288 files against prereg_v2/out_manifest.csv
