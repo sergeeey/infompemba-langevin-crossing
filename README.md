@@ -95,6 +95,7 @@ jupyter notebook analysis/Mpemba_Crossing_Analysis.ipynb
 │   └── trajectories_*.parquet
 ├── launch_full_experiment.py  # Main launcher
 ├── gpu_monitor.py             # Real-time GPU monitoring
+├── legacy_v1/                 # superseded v1 planning/submission material (see legacy_v1/README.md)
 ├── requirements.txt
 └── README.md
 ```
