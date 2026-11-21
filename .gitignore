@@ -6,3 +6,4 @@ __pycache__/
 .qwen/
 prereg_v2/out/
 deposit_staging/
+prereg_v2/out_d214/
