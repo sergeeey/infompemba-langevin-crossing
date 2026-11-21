@@ -10,11 +10,12 @@ which ones you did. Nothing here needs the GPU/ML experiments of the earlier pro
 
 ## Task 1 - rerun the checks (about 30 minutes)
 
-Follow `REPRODUCE.md` sections 1-3 on your own machine:
+Follow `REPRODUCE.md` sections 1-3 on your own machine. Where it says `git checkout feature/prereg-v2`, use the tag instead,
+`git checkout review-v0.7.1`: the branch moves, the tag does not, and the numbers below belong to the tagged commit.
 
 ```bash
-python -m pytest -q tests                           # expect: 45 passed
-python prereg_v2/check_note_claims.py prereg_v2     # expect: 56 of 56 claims reproduced (needs the curve archive, REPRODUCE.md section 3)
+python -m pytest -q tests                           # expect: 46 passed with the curve archive unpacked (4 stored-curve tests are skipped without it)
+python prereg_v2/check_note_claims.py prereg_v2     # expect: 65 of 65 claims reproduced (needs the curve archive, REPRODUCE.md section 3)
 python prereg_v2/verify_manifest.py                 # expect: all 288 SHA-256 values match
 python prereg_v2/check_guard_on_main_run.py         # expect: 0 KL/W1 labels changed
 ```
@@ -85,5 +86,5 @@ used AI tools yourself. I will not edit a response; I will answer it separately.
 > I have a small correction note with a reproducibility package on an earlier claim of mine of a "Mpemba-like crossing" in a double-well
 > Langevin model (the effect turns out to be a metric artefact in my earlier analysis; the re-analysis shows the known spectral
 > mechanism). Everything was done with AI assistance and has had no human check. Would you spend 30 minutes on task 1 or longer on
-> task 2 or 3 of `REVIEW_REQUEST.md` in https://github.com/sergeeey/infompemba-langevin-crossing (branch `feature/prereg-v2`)? A
+> task 2 or 3 of `REVIEW_REQUEST.md` in https://github.com/sergeeey/infompemba-langevin-crossing (tag `review-v0.7.1`, https://github.com/sergeeey/infompemba-langevin-crossing/tree/review-v0.7.1)? A
 > negative finding is exactly what I am after.
