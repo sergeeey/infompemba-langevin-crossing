@@ -1,0 +1,22 @@
+(1.0, 0.2, 0.0): done (min rho 0.00e+00, max mass drift 3.95e-14)
+(2.0, 0.2, 0.0): done (min rho 0.00e+00, max mass drift 1.44e-13)
+(1.0, 0.1, 0.1): done (min rho 0.00e+00, max mass drift 1.30e-13)
+(0.1, 1.0, 0.1): done (min rho 0.00e+00, max mass drift 1.14e-14)
+(3.0, 0.3, 0.05): done (min rho 0.00e+00, max mass drift 1.25e-13)
+(1.5, 0.05, 0.1): done (min rho 0.00e+00, max mass drift 1.03e-12)
+(5.0, 0.05, 0.02): done (min rho 0.00e+00, max mass drift 2.52e-11)
+(5.0, 0.05, 0.05): done (min rho 0.00e+00, max mass drift 4.11e-11)
+(5.0, 0.05, 0.1): done (min rho 0.00e+00, max mass drift 1.54e-11)
+(3.0, 0.05, 0.05): done (min rho 0.00e+00, max mass drift 1.87e-11)
+(5.0, 0.1, 0.05): done (min rho 0.00e+00, max mass drift 1.88e-11)
+
+A1: PASS
+A2: FAIL (4)
+    ((1.0, 0.2, 0.0), 'kl', [0.02893759802276842, 9.143135656292573])
+    ((1.0, 0.2, 0.0), 'w1', [0.018219963231968166, 2.5773263102453625])
+    ((2.0, 0.2, 0.0), 'kl', [0.041218756093603995, 1.8992346683812704])
+    ((2.0, 0.2, 0.0), 'w1', [0.03147056868649213, 2.0484864136626832])
+A3: PASS
+A4: FAIL (1)
+    ((5.0, 0.05, 0.05), 'w1', 'hot', 0.8013520082350025)
+A5: PASS

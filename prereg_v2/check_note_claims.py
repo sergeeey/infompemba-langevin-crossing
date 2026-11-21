@@ -30,7 +30,9 @@ results = []
 
 def chk(label, ok, stated, computed):
     results.append(ok)
-    print(f"[{'OK' if ok else 'MISMATCH'}] {label}: note says {stated}; recomputed {computed}")
+    print(
+        f"[{'OK' if ok else 'MISMATCH'}] {label}: note says {stated}; recomputed {computed}"
+    )
 
 
 with open("prereg_v2/summary_main.csv", encoding="utf-8") as fh:
@@ -84,8 +86,17 @@ chk(
     "224 (56 per kappa)",
     f"{len(el)} ({dict(el.groupby('kappa').size())})",
 )
-chk("kappa!=0 R-eligible", len(el[el.kappa != 0]) == 168, "168", str(len(el[el.kappa != 0])))
-pool = el[(~el.r.between(0.95, 1.05)) & (el.kl_label != "NO_TEST") & np.isfinite(el.kl_lastgap)]
+chk(
+    "kappa!=0 R-eligible",
+    len(el[el.kappa != 0]) == 168,
+    "168",
+    str(len(el[el.kappa != 0])),
+)
+pool = el[
+    (~el.r.between(0.95, 1.05))
+    & (el.kl_label != "NO_TEST")
+    & np.isfinite(el.kl_lastgap)
+]
 dis = pool[(pool.kl_lastgap > 0) != (pool.r < 1)]
 chk(
     "R agreement (excluding [0.95,1.05])",
@@ -126,7 +137,12 @@ chk(
     "224 eig / 64 quad",
     f"{(M.lam_src == 'eig').sum()} / {(M.lam_src == 'quad').sum()}",
 )
-chk("KL P0 min ratio", M.kl_p0.min() >= 30.4, ">= 30.4 (exactly 30.4557)", f"{M.kl_p0.min():.4f}")
+chk(
+    "KL P0 min ratio",
+    M.kl_p0.min() >= 30.4,
+    ">= 30.4 (exactly 30.4557)",
+    f"{M.kl_p0.min():.4f}",
+)
 chk(
     "energy at kappa=0 degenerate",
     (k0.u_p0 > 1e12).all(),
@@ -199,9 +215,13 @@ chk(
     "225, all",
     f"{len(S)}, {(S.kl_label != 'NO_TEST').sum()}",
 )
-kl_e = {s: int(((S.sigma == s) & (S.kl_label == "EFFECT")).sum()) for s in (1.0, 1.5, 3.0)}
+kl_e = {
+    s: int(((S.sigma == s) & (S.kl_label == "EFFECT")).sum()) for s in (1.0, 1.5, 3.0)
+}
 chk("KL EFFECT by sigma", kl_e == {1.0: 55, 1.5: 65, 3.0: 75}, "55/65/75", str(kl_e))
-nt_s = {s: int(((S.sigma == s) & (S.w1_label == "NO_TEST")).sum()) for s in (1.0, 1.5, 3.0)}
+nt_s = {
+    s: int(((S.sigma == s) & (S.w1_label == "NO_TEST")).sum()) for s in (1.0, 1.5, 3.0)
+}
 chk("W1 NO_TEST by sigma", nt_s == {1.0: 55, 1.5: 55, 3.0: 5}, "55/55/5", str(nt_s))
 mu2 = S[S.mu.abs() == 2]
 w = {}
@@ -227,7 +247,9 @@ chk(
 cs = common.reset_index()
 cs["a"] = (cs["b"] / cs["T"]).round(9)
 n_cond = cs[["a", "kappa", "mu"]].drop_duplicates().shape[0]
-chk("distinct dimensionless conditions in the common set", n_cond == 4, "4", str(n_cond))
+chk(
+    "distinct dimensionless conditions in the common set", n_cond == 4, "4", str(n_cond)
+)
 extra3 = mu2[mu2.sigma == 3.0].set_index(key).drop(index=common.index, errors="ignore")
 chk(
     "sigma=3 extra records all EFFECT",
@@ -278,7 +300,12 @@ chk(
     f"{len(nm)} / {sorted(set(nm.mu.abs()))} / {int((abs(nm.r - 1) <= 0.05).sum())} / {nm.r.min():.3f}..{nm.r.max():.3f}",
 )
 split = (int((nm.sigma == 1.0).sum()), int((nm.sigma == 1.5).sum()))
-chk("no-margin split by sigma", split == (20, 10), "20 (sigma=1), 10 (sigma=1.5)", str(split))
+chk(
+    "no-margin split by sigma",
+    split == (20, 10),
+    "20 (sigma=1), 10 (sigma=1.5)",
+    str(split),
+)
 agree = ((S.kl_lastgap > 0) == (S.r < 1)).sum()
 chk(
     "R agreement in sweep, r<1 everywhere",
@@ -343,11 +370,19 @@ chk(
 se = C.v1_sd / np.sqrt(10)
 chk(
     "noise floors: all 3.5, degenerate 12.3, other 1.9",
-    [round(0.8 * se.mean(), 1), round(0.8 * se[deg].mean(), 1), round(0.8 * se[~deg].mean(), 1)]
+    [
+        round(0.8 * se.mean(), 1),
+        round(0.8 * se[deg].mean(), 1),
+        round(0.8 * se[~deg].mean(), 1),
+    ]
     == [3.5, 12.3, 1.9],
     "3.5 / 12.3 / 1.9",
     str(
-        [round(0.8 * se.mean(), 1), round(0.8 * se[deg].mean(), 1), round(0.8 * se[~deg].mean(), 1)]
+        [
+            round(0.8 * se.mean(), 1),
+            round(0.8 * se[deg].mean(), 1),
+            round(0.8 * se[~deg].mean(), 1),
+        ]
     ),
 )
 sw = [
@@ -367,7 +402,8 @@ chk(
 )
 chk(
     "57 points with majority below theta; overlap 42",
-    int((f > 0.5).sum()) == 57 and len(set(C.index[C.pl_v1pct > 70]) & set(C.index[f > 0.5])) == 42,
+    int((f > 0.5).sum()) == 57
+    and len(set(C.index[C.pl_v1pct > 70]) & set(C.index[f > 0.5])) == 42,
     "57 / 42",
     f"{int((f > 0.5).sum())} / {len(set(C.index[C.pl_v1pct > 70]) & set(C.index[f > 0.5]))}",
 )
@@ -456,6 +492,81 @@ if RECHECK:
         "71/70/70/69",
         str([p["first"] for p in P]),
     )
+
+print()
+print("=== D2.14 resolution and wall checks (d214_summary.csv, committed) ===")
+D = pd.read_csv("prereg_v2/d214_summary.csv")
+cs = D[D.state.isin(["cold", "hot"])]
+a5 = D[D.state.astype(str).str.startswith("gap_L")]
+gv = D[D.state == "gap_vs_main"]
+chk(
+    "D2.14 A5: gap change with walls at |x|=12 and 21, 44 cases",
+    len(a5) == 44 and a5.A5_gap_rel_change.max() <= 1.5e-6,
+    "at most 1.4e-6 (44 cases, no label change)",
+    f"n={len(a5)} max {a5.A5_gap_rel_change.max():.3e}",
+)
+chk(
+    "D2.14 observed time order, median per case",
+    len(cs) == 44 and cs.p_t_median.min() >= 0.99 and cs.p_t_median.max() <= 1.01,
+    "1.00 in all 44 cases",
+    f"{cs.p_t_median.min():.3f}..{cs.p_t_median.max():.3f}",
+)
+chk(
+    "D2.14 gap change refined vs main, 22 cases",
+    len(gv) == 22 and gv.gap_rel_change_vs_main.max() <= 0.011,
+    "at most 1.1%",
+    f"max {gv.gap_rel_change_vs_main.max():.4f}",
+)
+over = cs[cs.A2_diff_over_main_err > 1]
+chk(
+    "D2.14 A2 exceedances: 4 cases, hot state, kappa=0, b/T=5 and 10",
+    len(over) == 4
+    and set(over.state) == {"hot"}
+    and set(over.kappa) == {0.0}
+    and over.A2_diff_over_main_err.max() < 9.2,
+    "4 of 44, all hot-state at kappa=0, at most 9.2 times the main error estimate",
+    f"{len(over)} cases, max {over.A2_diff_over_main_err.max():.2f}",
+)
+rest = cs[cs.A2_diff_over_main_err <= 1]
+chk(
+    "D2.14 A2 elsewhere",
+    len(rest) == 40 and rest.A2_diff_over_main_err.max() <= 0.15,
+    "at most 0.15 of the main error estimate in the other 40 cases",
+    f"max {rest.A2_diff_over_main_err.max():.3f}",
+)
+chk(
+    "D2.14 A4 (REL 1e-10): one case above 10%",
+    (cs.interaction_median > 0.10).sum() == 1,
+    "1 of 44 (W1 hot at (5, 0.05, 0.05), median 0.80)",
+    f"{(cs.interaction_median > 0.10).sum()}; max {cs.interaction_median.max():.3f}",
+)
+kl_cold = cs[(cs.metric == "kl") & (cs.state == "cold")]
+w1_cold = cs[(cs.metric == "w1") & (cs.state == "cold")]
+chk(
+    "D2.14 labels at the finer level",
+    (kl_cold.label_refined == "EFFECT").sum() == 11
+    and (w1_cold.label_refined == "EFFECT").sum() == 10
+    and (w1_cold.label_refined == "NO_TEST").sum() == 1,
+    "KL EFFECT 11 of 11, W1 EFFECT 10 of 11 and NO_TEST 1 (P0 1.2487 at dx=0.0025)",
+    f"KL {(kl_cold.label_refined == 'EFFECT').sum()}/11, W1 {(w1_cold.label_refined == 'EFFECT').sum()}"
+    f" EFFECT + {(w1_cold.label_refined == 'NO_TEST').sum()} NO_TEST",
+)
+
+px_ok = ((cs.p_x_median >= 1.9) & (cs.p_x_median <= 2.1)).sum()
+px_bad = cs[(cs.p_x_median < 1.9) | (cs.p_x_median > 2.1)]
+chk(
+    "D2.14 observed space order in 1.9-2.1",
+    px_ok == 36 and len(px_bad) == 8 and set(px_bad.state) == {"hot"},
+    "36 of 44; the 8 exceptions are hot-state curves",
+    f"{px_ok} of {len(cs)}; exceptions {len(px_bad)}, states {sorted(set(px_bad.state))}",
+)
+p0 = cs[(cs.metric == "w1") & (cs.state == "cold") & (cs.label_refined == "NO_TEST")]
+chk(
+    "D2.14 W1 P0 at dx=0.0025 below 1.25 for the NO_TEST configuration",
+    len(p0) == 1 and abs(p0.p0_refined.iloc[0] - 1.24868) < 1e-4,
+    "1.24868",
+    f"{p0.p0_refined.tolist()}",
+)
 
 print(f"\n{sum(results)} of {len(results)} claims reproduced")
 sys.exit(0 if all(results) else 1)

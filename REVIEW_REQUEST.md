@@ -1,6 +1,6 @@
 # Request for independent human review
 
-**Status of the work.** `paper/note_v2_draft.md` (draft v0.6, not for submission) is a correction note and numerical case study. It is
+**Status of the work.** `paper/note_v2_draft.md` (draft v0.7, not for submission) is a correction note and numerical case study. It is
 **not an independent replication**: the solver, the checks, four "skeptic" passes and the code reviews were all done with AI assistance
 in one workflow, and no human other than the author has checked it. The aim of this request is to replace that gap with a real
 check, including a negative one. A finding that the analysis is wrong is a useful result and will be recorded as such.
