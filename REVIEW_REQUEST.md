@@ -61,6 +61,13 @@ Please report in particular any configuration where your label or your P0 ratio 
 Before reading the code, you may also try to predict the sign of the late-time KL gap at kappa = 0 from symmetry alone; that is the
 design-determined part of the result.
 
+**Do not compare the hot-state distance at kappa = 0 beyond round-off.** In the first two rows (kappa = 0) the symmetric hot state
+has no overlap with the odd slowest mode, so at late times its distance to equilibrium is round-off noise: in my runs of order 1e-28 in
+KL and 1e-13 in W1 at the last valid time, roughly 1e-20 (KL) and 1e-9 (W1) of the cold distance, and its raw value is not monotone
+in dx (post-hoc check D2.14, `prereg_v2/d214_summary.csv`). Your solver will give different numbers at that level, and that is
+expected. At these two rows compare the cold distance, the gap D_cold - D_hot, the labels and the P0 ratios, not the late-time hot
+distance itself. A difference there is not an error of either solver unless it exceeds the round-off level of the arithmetic you used.
+
 ## What would count as a negative result
 
 Any of: a different label at several of the configurations above; a different lambda_1 or r; an initial-ordering or boundary error in
